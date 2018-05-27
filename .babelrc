@@ -9,6 +9,7 @@
             },
             "useBuiltIns": "entry"
         }],
-        "react"
+        "react",
+        "stage-2"
     ]
 }
