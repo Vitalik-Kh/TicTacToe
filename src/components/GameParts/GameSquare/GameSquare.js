@@ -10,7 +10,8 @@ const gameSquare = (props) => {
     if (props.player == 'O') { player = <PlayerO /> }
     return (
         <div
-            className={classNames(classes.GameSquare, classes['Square-' + props.fieldID])}>
+            className={ classNames(classes.GameSquare, classes['Square-' + props.squareID]) } 
+            onClick = { () => props.clicked(props.squareID) } >
             {player}
         </div>
     )
