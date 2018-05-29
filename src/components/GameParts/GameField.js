@@ -14,8 +14,13 @@ const gameField = (props) => {
                 clicked = { props.playerMoveHandler } />
         )
     });
+    let lineThrough = null;
+    if (props.start) {
+        lineThrough = <div className={classes.LineThrough}></div>
+    }
     return (
         <div className = {classes.GameField}>
+            {lineThrough}
             {transformedGameSquares}
         </div>
     )

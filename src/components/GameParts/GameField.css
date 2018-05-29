@@ -2,4 +2,26 @@
     width: 80vw;
     height: 80vw;
     margin: auto;
+    position: relative;
+}
+
+.LineThrough {
+    border: 3px solid red;
+    position: absolute;
+    z-index: 10;
+
+    opacity: 1;
+    animation: lineProgress 0.2s;
+}
+
+.LineThroughDown {
+    transform: rotate(45deg);
+    width: 120%;
+    left: -10%;
+    top: 49%;
+}
+
+@keyframes lineProgress {
+    from {opacity: 0}
+    to {opacity: 1}
 }
