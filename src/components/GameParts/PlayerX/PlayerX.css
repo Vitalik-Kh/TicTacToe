@@ -20,3 +20,16 @@
     position: absolute;
     transform: rotate(-45deg);
 }
+
+.Winner {
+    animation: Winner 1.5s;
+}
+
+@keyframes Winner {
+    0% {transform: scale(1,1)}
+    20% {transform: scale(0.2,0.2)}
+    40% {transform: scale(1.5,1.5)}
+    60% {transform: scale(0.5,0.5)}
+    80% {transform: scale(1.4,1.4)}
+    100% {transform: scale(1,1)}
+}
