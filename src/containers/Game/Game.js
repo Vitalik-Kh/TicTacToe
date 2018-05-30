@@ -1,16 +1,38 @@
 import React from 'react';
 
 import GameField from '../../components/GameParts/GameField';
+import AI from '../../utilities/AI/AI';
 
 class Game extends React.Component {
     state = {
         currentPlayer: 'X',
-        start: false,
+        players: {
+            playerX: 'human',
+            playerO: 'AI'
+        },
         //X, O or null:
         squaresStatus: [null, null, null, 
                         null, null, null, 
                         null, null, null],
         winner: null
+    }
+
+    componentDidUpdate = () => {
+        if (this.state.players.playerO === 'AI' && 
+            this.state.currentPlayer === 'O' &&
+            !this.state.winner) {
+            const AImove = AI(this.state.squaresStatus);
+            const newSquaresStatus = [...this.state.squaresStatus];
+            newSquaresStatus[AImove] = this.state.currentPlayer;
+            const nextPlayer = this.state.currentPlayer === 'X' ? 'O' : 'X';
+            const winner = this.checkForWinner(newSquaresStatus);
+            this.setState({
+                ...this.state,
+                currentPlayer: nextPlayer,
+                squaresStatus: newSquaresStatus,
+                winner: winner
+            });
+        }
     }
 
     checkForWinner = (arr) => {
@@ -50,6 +72,7 @@ class Game extends React.Component {
             squaresStatus: newSquaresStatus,
             winner: winner
         });
+
     }
 
     render() {
