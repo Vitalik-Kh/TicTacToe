@@ -11,7 +11,12 @@ const gameSquare = (props) => {
     return (
         <div
             className={ squareClasses.join(' ') } 
-            onClick = { () => props.clicked(props.squareID) } >
+            onClick = { 
+                !props.inputDisabled ?
+                () => props.clicked(props.squareID) :
+                null
+            } 
+        >
             {player}
         </div>
     )

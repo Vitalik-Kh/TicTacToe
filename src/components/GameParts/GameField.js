@@ -12,6 +12,7 @@ const gameField = (props) => {
                 squareID = { id } 
                 player = { props.squaresStatus[id] }
                 clicked = { props.playerMoveHandler } 
+                inputDisabled = { props.inputDisabled }
                 winner = { props.winner ? 
                            props.winner.winIDs.join('').search(id) !== -1 ? true : false :
                            false }
