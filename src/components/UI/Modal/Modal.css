@@ -1,0 +1,29 @@
+.Modal {
+    width: 80%;
+    height: 200px;
+    position: fixed;
+    top: 25%;
+    left: 10%;
+    z-index: 11;
+    background: #fff;
+}
+
+.ModalSlideIn {
+    animation: slideIn .4s;
+}
+
+.ModalSlideOut {
+    animation: slideOut .4s forwards;
+}
+
+@keyframes slideIn {
+    0% { top: -50%; opacity: 0; }
+    80% { top: 30%; opacity: 1 }
+    100% { top: 25%; opacity: 1 }
+}
+
+@keyframes slideOut {
+    0% { top: 25%; opacity: 1 }
+    20% { top: 30%; opacity: 1 }
+    100% { top: -50%; opacity: 0; }
+}

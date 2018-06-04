@@ -3,6 +3,8 @@ import React from 'react';
 import GameField from '../../components/GameParts/GameField';
 import AI from '../../AI/AI';
 import {checkForWinner} from '../../utilities/checkForWinner';
+import Aux from '../../hoc/Auxy';
+import Modal from '../../components/UI/Modal/Modal';
 
 class Game extends React.Component {
     state = {
@@ -14,32 +16,38 @@ class Game extends React.Component {
                         null, null, null, 
                         null, null, null],
         winner: null,
-        disableInput: false
+        disableInput: true,
+        showModal: true
+    }
+
+    componentDidMount = () => {
+        this.myComponentDidMountOrUpdate();
     }
 
     componentDidUpdate = () => {
+        this.myComponentDidMountOrUpdate();
+    }
+
+    myComponentDidMountOrUpdate = () => {
         if (((this.state.playerX.AI && this.state.currentPlayer === 'X') ||
-            (this.state.playerO.AI && this.state.currentPlayer === 'O')) &&
-            !this.state.winner) {
-            
-            const AImove = AI(this.state.squaresStatus);
-            const newSquaresStatus = [...this.state.squaresStatus];
-            newSquaresStatus[AImove] = this.state.currentPlayer;
-            const nextPlayer = this.state.currentPlayer === 'X' ? 'O' : 'X';
-            const winner = checkForWinner(newSquaresStatus);
-            this.setState({
-                ...this.state,
-                currentPlayer: nextPlayer,
-                squaresStatus: newSquaresStatus,
-                winner: winner,
-                disableInput: false
-            });
+             (this.state.playerO.AI && this.state.currentPlayer === 'O')) &&
+             !this.state.winner) {
+            this.aiMove();
         } else if (!this.state.winner && this.state.disableInput === true) {
             this.setState({disableInput: false});
         } 
     }
 
-    playerMoveHandler = (squareID) => {
+    aiMove = () => {            
+        const AImove = AI(this.state.squaresStatus);
+        this.playerMove(AImove, false)
+    }
+
+    humanMoveHandler = (squareID) => {
+        this.playerMove(squareID, true);
+    }
+
+    playerMove = (squareID, disable) => {
         if (this.state.squaresStatus[squareID] === null) {
             const newSquaresStatus = [...this.state.squaresStatus];
             newSquaresStatus[squareID] = this.state.currentPlayer;
@@ -51,22 +59,36 @@ class Game extends React.Component {
                 currentPlayer: nextPlayer,
                 squaresStatus: newSquaresStatus,
                 winner: winner,
-                disableInput: true
+                disableInput: disable
             });
         }
     }
 
+    backdropClickHandler = () => {
+        this.setState(prevState => ({showModal: !prevState.showModal}))
+    }
+
     render() {
+        const modal = this.state.showModal ? 
+            <Modal 
+                backdropClicked = {this.backdropClickHandler}
+                visible = { this.state.showModal }/> :
+            null;
+
         return (
-            <div>
+            <Aux>
+                <Modal 
+                    visible = { this.state.showModal }
+                    backdropClicked = { this.backdropClickHandler } 
+                />
                 <GameField 
                     squaresStatus = { this.state.squaresStatus }
-                    playerMoveHandler = { this.playerMoveHandler }
-                    start = { this.state.start }
+                    playerMoveHandler = { this.humanMoveHandler }
                     winner = { this.state.winner }
                     inputDisabled = { this.state.disableInput }
                 />
-            </div>
+            </Aux>
+            
         )
     }
 }

@@ -3,9 +3,9 @@ const htmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     devtool: 'cheap-module-eval-source-map',
-    //so webpack will automaticly see files with this extensions:
+    //can be omitted so webpack will automaticly see files with this extensions:
     resolve: {
-        extensions: [".js", ".jsx"]
+       extensions: [".js", ".jsx"]
     },
     module: {
         rules: [
