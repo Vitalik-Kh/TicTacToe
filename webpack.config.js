@@ -1,8 +1,10 @@
 const autoprefixer = require('autoprefixer');
 const htmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     devtool: 'cheap-module-eval-source-map',
+
     //can be omitted so webpack will automaticly see files with this extensions:
     resolve: {
        extensions: [".js", ".jsx"]
@@ -47,6 +49,10 @@ module.exports = {
             {
                 test: /\.(png|jpe?g|gif)$/,
                 loader: 'url-loader?limit=8000&name=images/[name].[ext]'
+            },
+            {
+                test: /\.svg$/,
+                loader: 'file-loader'
             }
         ]
     },

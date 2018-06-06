@@ -5,6 +5,7 @@ import AI from '../../AI/AI';
 import {checkForWinner} from '../../utilities/checkForWinner';
 import Aux from '../../hoc/Auxy';
 import Modal from '../../components/UI/Modal/Modal';
+import StartMenu from '../../components/GameParts/StartMenu/StartMenu';
 
 class Game extends React.Component {
     state = {
@@ -17,7 +18,8 @@ class Game extends React.Component {
                         null, null, null],
         winner: null,
         disableInput: true,
-        showModal: true
+        showModal: true,
+        newGame: true
     }
 
     componentDidMount = () => {
@@ -69,18 +71,13 @@ class Game extends React.Component {
     }
 
     render() {
-        const modal = this.state.showModal ? 
-            <Modal 
-                backdropClicked = {this.backdropClickHandler}
-                visible = { this.state.showModal }/> :
-            null;
-
         return (
             <Aux>
                 <Modal 
                     visible = { this.state.showModal }
-                    backdropClicked = { this.backdropClickHandler } 
-                />
+                    backdropClicked = { this.backdropClickHandler } >
+                    <StartMenu newGame = { this.state.newGame }/>
+                </Modal>
                 <GameField 
                     squaresStatus = { this.state.squaresStatus }
                     playerMoveHandler = { this.humanMoveHandler }

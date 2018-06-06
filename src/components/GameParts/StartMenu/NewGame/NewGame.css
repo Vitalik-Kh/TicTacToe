@@ -1,0 +1,56 @@
+.Title {
+    text-align: center;
+    margin: 0;
+}
+.Toggle {
+    width: 220px;
+    height: 90px;
+    margin: auto;
+    position: relative;
+    background: #fff;
+    border: 3px solid gray;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.ToggleSlider {
+    height: 90px;
+    width: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #B72C48;
+    position: absolute;
+    top: -3px;
+    transition: all .4s;
+}
+
+.ToggleSlider img {
+    position: relative;
+    transition: .4s;
+}
+
+.ToggleSliderLeft.ToggleSlider img:nth-child(1) {
+    transform: translateX(50%);
+}
+.ToggleSliderLeft.ToggleSlider img:nth-child(2) {
+    transform: translateX(-50%);
+}
+
+.ToggleSliderRight.ToggleSlider img:nth-child(1) {
+    transform: translateX(0);
+}
+.ToggleSliderRight.ToggleSlider img:nth-child(2) {
+    transform: translateX(0);
+}
+
+.ToggleSliderLeft {
+    left: -3px;
+}
+
+.ToggleSliderRight {
+    left: 90px;
+    width: 127px;
+}
+

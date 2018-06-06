@@ -1,0 +1,5 @@
+.UserIcon {
+    background: url('../../../assets/user_sprite.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}

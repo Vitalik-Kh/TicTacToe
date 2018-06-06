@@ -22,7 +22,7 @@ const modal = (props) => {
                     <Aux>
                         <Backdrop clicked = { props.backdropClicked } transState = { state }/>
                         <div className = { transClasses.join(' ') }>
-            
+                            { props.children }
                         </div>
                     </Aux>
                 )
