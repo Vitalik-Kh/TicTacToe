@@ -1,0 +1,81 @@
+$toggle-height: 70px;
+$toggle-width: 190px;
+
+%Toggle {
+    margin: auto;
+    position: relative;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    cursor: pointer;
+    i { transition: all .4s; font-size: $toggle-height / 2; }
+}
+
+%IconColors_ToggleLeft {
+    div:nth-child(1) * { color: #fff; }
+    div:nth-child(2) * { color: #B72C48; }
+}
+
+%IconColors_ToggleRight {
+    div:nth-child(1) * { color: #B72C48; }
+    div:nth-child(2) * { color: #fff; } 
+}
+
+.ToggleSlider {
+    height: $toggle-height;
+    width: $toggle-height;
+    background: #B72C48;
+    position: absolute;
+    top: 0;
+    transition: all .4s;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3) inset;
+}
+
+.TogglePlayers {
+    @extend %Toggle;
+    width: $toggle-width;
+    height: $toggle-height;
+
+    .UserIcons > div:nth-child(1) { width: $toggle-height }
+    .UserIcons > div:nth-child(2) { width: $toggle-width - $toggle-height }
+
+    .TogglePlayersSliderLeft { left: 0; }    
+    .TogglePlayersSliderRight {
+        left: $toggle-height;
+        width: $toggle-width - $toggle-height;
+    }
+}
+
+.OnePlayer .UserIcons { @extend %IconColors_ToggleLeft; } 
+.TwoPlayers .UserIcons { @extend %IconColors_ToggleRight; }
+
+.ToggleXO {
+    @extend %Toggle;
+    width: $toggle-height * 2;
+    height: $toggle-height;
+
+    .UserIcons > div { 
+        width: $toggle-height; 
+        div { transition: all .4s; }
+    }
+
+    .ToggleXOSliderLeft { left: 0; }
+    .ToggleXOSliderRight { left: $toggle-height; }
+}
+
+.PlayX .UserIcons { @extend %IconColors_ToggleLeft; }
+.PlayO .UserIcons { @extend %IconColors_ToggleRight; }
+
+.UserIcons { 
+    z-index: 20;
+    > div {
+        height: $toggle-height;
+        float: left;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+

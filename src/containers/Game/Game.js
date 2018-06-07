@@ -6,19 +6,21 @@ import {checkForWinner} from '../../utilities/checkForWinner';
 import Aux from '../../hoc/Auxy';
 import Modal from '../../components/UI/Modal/Modal';
 import StartMenu from '../../components/GameParts/StartMenu/StartMenu';
+import {v} from '../../utilities/states';
 
 class Game extends React.Component {
     state = {
-        currentPlayer: 'X',
-        playerX: {human: true, AI: false},
-        playerO: {human: false, AI: true},
+        currentPlayer: v.X,
+        playerX: v.human,
+        playerO: v.AI,
         //X, O or null:
         squaresStatus: [null, null, null, 
                         null, null, null, 
                         null, null, null],
         winner: null,
         disableInput: true,
-        showModal: true
+        showModal: true,
+        playing: false
     }
 
     componentDidMount = () => {
@@ -30,13 +32,15 @@ class Game extends React.Component {
     }
 
     myComponentDidMountOrUpdate = () => {
-        if (((this.state.playerX.AI && this.state.currentPlayer === 'X') ||
-             (this.state.playerO.AI && this.state.currentPlayer === 'O')) &&
-             !this.state.winner) {
-            this.aiMove();
-        } else if (!this.state.winner && this.state.disableInput === true) {
-            this.setState({disableInput: false});
-        } 
+        if (this.state.playing) {
+            if (((this.state.playerX === v.AI && this.state.currentPlayer === v.X) ||
+                (this.state.playerO === v.AI && this.state.currentPlayer === v.O)) &&
+                !this.state.winner) {
+                this.aiMove();
+            } else if (!this.state.winner && this.state.disableInput === true) {
+                this.setState({disableInput: false});
+            } 
+        }
     }
 
     aiMove = () => {            
@@ -52,7 +56,7 @@ class Game extends React.Component {
         if (this.state.squaresStatus[squareID] === null) {
             const newSquaresStatus = [...this.state.squaresStatus];
             newSquaresStatus[squareID] = this.state.currentPlayer;
-            const nextPlayer = this.state.currentPlayer === 'X' ? 'O' : 'X';
+            const nextPlayer = this.state.currentPlayer === v.X ? v.O : v.X;
             const winner = checkForWinner(newSquaresStatus);
         
             this.setState({
@@ -69,20 +73,55 @@ class Game extends React.Component {
         this.setState(prevState => ({showModal: !prevState.showModal}))
     }
 
+    toggleGameMode = () => {
+        const O = this.state.playerO;
+        const X = this.state.playerX;
+        if (O === v.AI || X === v.AI) {
+            this.setState({
+                playerO: v.human,
+                playerX: v.human
+            })
+        } else if (O === v.human && X === v.human) {
+            this.setState({
+                playerX: v.human,
+                playerO: v.AI
+            });
+        }
+    }
+
+    toggleXO = () => {
+        if (this.state.playerX === v.AI || this.state.playerO === v.AI) {
+            this.setState(prevState => {
+                return ({
+                    playerO: prevState.playerO === v.human ? v.AI : v.human,
+                    playerX: prevState.playerX === v.human ? v.AI : v.human
+                });
+            });
+        }  
+    }
+
     render() {
+        let gameField = null;
+        if (this.state.playing) {
+            gameField =  <GameField 
+                squaresStatus = { this.state.squaresStatus }
+                playerMoveHandler = { this.humanMoveHandler }
+                winner = { this.state.winner }
+                inputDisabled = { this.state.disableInput }
+            />
+        }
         return (
             <Aux>
                 <Modal 
                     visible = { this.state.showModal }
                     backdropClicked = { this.backdropClickHandler } >
-                    <StartMenu />
+                    <StartMenu 
+                        toggleGameMode = { this.toggleGameMode }
+                        toggleXO = { this.toggleXO }
+                        X = { this.state.playerX }
+                        O = { this.state.playerO } />
                 </Modal>
-                <GameField 
-                    squaresStatus = { this.state.squaresStatus }
-                    playerMoveHandler = { this.humanMoveHandler }
-                    winner = { this.state.winner }
-                    inputDisabled = { this.state.disableInput }
-                />
+                { gameField }
             </Aux>
             
         )

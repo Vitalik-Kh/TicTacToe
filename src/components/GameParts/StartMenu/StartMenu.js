@@ -3,24 +3,22 @@ import React from 'react';
 import NewGame from './NewGame/NewGame';
 //import PlayAgain from './PlayAgain/PlayAgain';
 
-class startMenu extends React.Component {
-    state = {
-        newGame: true,
-        playerX: {human: true, AI: false},
-        playerO: {human: false, AI: true}
+const startMenu = (props) => {
+    let gameStart = null;
+    if (true) {
+        gameStart = <NewGame 
+            toggleGameMode = { props.toggleGameMode }
+            toggleXO = { props.toggleXO }
+            X = { props.X }
+            O = { props.O } />
+    } else {
+        gameStart = <div>Play again</div>
     }
 
-    render() {
-        let gameStart = null;
-        if (this.state.newGame) {
-            gameStart = <NewGame />
-        } else {
-            gameStart = <div>Play again</div>
-        }
-        return (
-            gameStart
-        );
-    }
+    return (
+        gameStart
+    );
+
 }
 
 export default startMenu;

@@ -1,48 +1,33 @@
 import React from 'react';
 
-import classes from './NewGame.css';
+import classes from './NewGame.scss';
 import Aux from '../../../../hoc/Auxy';
+import TogglePlayers from './Toggle/TogglePlayers';
+import ToggleXO from './Toggle/ToggleXO';
+import {v} from '../../../../utilities/states';
 
-class newGame extends React.Component {
-    state = {
-        on: true
-    }
+const newGame = (props) => {
+    const singlePlayer = props.X === v.AI || props.O === v.AI ? true : false,
+          playWithX = props.X === v.human ? true : false;
 
-    toggle = () => {
-        this.setState({on: !this.state.on});
-    }
-
-    render = () => {
-        const toggleSliderClasses = [
-            classes.ToggleSlider,
-            this.state.on ? classes.ToggleSliderLeft : classes.ToggleSliderRight
-        ];
-        const toggleClasses = [
-            classes.Toggle,
-            this.state.on ? classes.OnePlayer : classes.TwoPlayers
-        ];
-
-        let singlePlayer = true;
-     
-        return (
+    let toggleXO = null;
+    if (singlePlayer) {
+        toggleXO = (
             <Aux>
+                <p>Play with X or O:</p>
+                <ToggleXO playWithX = {playWithX} clicked = {props.toggleXO}/>
+            </Aux>
+        );
+    }
+    return (
+        <Aux>
             <h2 className = {classes.Title}>Start new game</h2>
             <p>Players:</p>
-            <div className = {toggleClasses.join(' ' )} onClick={this.toggle}>
-                <div className = {toggleSliderClasses.join(' ')}></div>
-                <div className={classes.UserIcon}>
-                    <i className="far fa-user"></i>
-                </div>
-                <div className = {classes.UserIcon}>
-                    <i className="far fa-user"></i>
-                    <i className="far fa-user"></i>
-                </div>
-            </div>
-
-            </Aux>
-        )
-    }
-
+            <TogglePlayers singlePlayer = {singlePlayer} clicked = {props.toggleGameMode}/> 
+            { toggleXO }
+            <button>PLAY</button>    
+        </Aux>
+    )
 }
 
 export default newGame;

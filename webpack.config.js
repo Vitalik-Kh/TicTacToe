@@ -47,6 +47,37 @@ module.exports = {
                 ]
             },
             {
+                test: /\.scss$/,
+                exclude: /node_modules/,
+                use: [
+                    { loader: 'style-loader'},
+                    { 
+                        loader: 'css-loader',
+                        options: {
+                            //next line inforsm css-loader about existance of 1 loader before it
+                            importLoaders: 1,
+                            modules: true,
+                            localIdentName: '[name]__[local]__[hash:base64:5]'
+                        } 
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            ident: 'postcss',
+                            plugins: () => {
+                                autoprefixer({
+                                    "browsers": [
+                                        ">1%",
+                                        "last 2 versions"
+                                    ]
+                                })
+                            }
+                        }
+                    },
+                    {loader: 'sass-loader'}
+                ]
+            },
+            {
                 test: /\.(png|jpe?g|gif)$/,
                 loader: 'url-loader?limit=8000&name=images/[name].[ext]'
             },
