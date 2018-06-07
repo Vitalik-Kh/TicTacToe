@@ -18,8 +18,7 @@ class Game extends React.Component {
                         null, null, null],
         winner: null,
         disableInput: true,
-        showModal: true,
-        newGame: true
+        showModal: true
     }
 
     componentDidMount = () => {
@@ -76,7 +75,7 @@ class Game extends React.Component {
                 <Modal 
                     visible = { this.state.showModal }
                     backdropClicked = { this.backdropClickHandler } >
-                    <StartMenu newGame = { this.state.newGame }/>
+                    <StartMenu />
                 </Modal>
                 <GameField 
                     squaresStatus = { this.state.squaresStatus }

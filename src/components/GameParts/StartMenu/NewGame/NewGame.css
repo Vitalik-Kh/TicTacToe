@@ -8,10 +8,10 @@
     margin: auto;
     position: relative;
     background: #fff;
-    border: 3px solid gray;
     display: flex;
     align-items: center;
     justify-content: space-around;
+    cursor: pointer;
 }
 
 .ToggleSlider {
@@ -22,13 +22,28 @@
     align-items: center;
     background: #B72C48;
     position: absolute;
-    top: -3px;
+    top: 0;
     transition: all .4s;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3) inset;
 }
 
-.ToggleSlider img {
-    position: relative;
-    transition: .4s;
+.UserIcon {
+    z-index: 20;
+}
+
+.UserIcon i { transition: all .4s; font-size: 44px; }
+
+.OnePlayer .UserIcon:nth-child(2) i {
+    color: #fff;
+}
+.OnePlayer .UserIcon:nth-child(3) i {
+    color: #B72C48;
+}
+.TwoPlayers .UserIcon:nth-child(2) i {
+    color: #B72C48;
+}
+.TwoPlayers .UserIcon:nth-child(3) i {
+    color: #fff;
 }
 
 .ToggleSliderLeft.ToggleSlider img:nth-child(1) {
@@ -46,11 +61,11 @@
 }
 
 .ToggleSliderLeft {
-    left: -3px;
+    left: 0;
 }
 
 .ToggleSliderRight {
     left: 90px;
-    width: 127px;
+    width: 130px;
 }
 
