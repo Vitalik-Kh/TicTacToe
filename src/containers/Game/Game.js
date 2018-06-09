@@ -45,14 +45,14 @@ class Game extends React.Component {
 
     aiMove = () => {            
         const AImove = AI(this.state.squaresStatus);
-        this.playerMove(AImove, false)
+        this.playerMove(AImove)
     }
 
     humanMoveHandler = (squareID) => {
-        this.playerMove(squareID, true);
+        this.playerMove(squareID);
     }
 
-    playerMove = (squareID, disable) => {
+    playerMove = (squareID) => {
         if (this.state.squaresStatus[squareID] === null) {
             const newSquaresStatus = [...this.state.squaresStatus];
             newSquaresStatus[squareID] = this.state.currentPlayer;
@@ -64,7 +64,7 @@ class Game extends React.Component {
                 currentPlayer: nextPlayer,
                 squaresStatus: newSquaresStatus,
                 winner: winner,
-                disableInput: disable
+                disableInput: true
             });
         }
     }
