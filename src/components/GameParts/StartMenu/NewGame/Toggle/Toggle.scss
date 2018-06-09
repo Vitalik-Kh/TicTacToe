@@ -1,5 +1,6 @@
-$toggle-height: 70px;
-$toggle-width: 190px;
+$toggle-height: 56px;
+$toggle-width: 140px;
+$toggle-color: #b72c48;
 
 %Toggle {
     margin: auto;
@@ -14,18 +15,18 @@ $toggle-width: 190px;
 
 %IconColors_ToggleLeft {
     div:nth-child(1) * { color: #fff; }
-    div:nth-child(2) * { color: #B72C48; }
+    div:nth-child(2) * { color: $toggle-color; }
 }
 
 %IconColors_ToggleRight {
-    div:nth-child(1) * { color: #B72C48; }
+    div:nth-child(1) * { color: $toggle-color; }
     div:nth-child(2) * { color: #fff; } 
 }
 
 .ToggleSlider {
     height: $toggle-height;
     width: $toggle-height;
-    background: #B72C48;
+    background: $toggle-color;
     position: absolute;
     top: 0;
     transition: all .4s;

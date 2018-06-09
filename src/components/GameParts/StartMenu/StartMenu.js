@@ -10,7 +10,8 @@ const startMenu = (props) => {
             toggleGameMode = { props.toggleGameMode }
             toggleXO = { props.toggleXO }
             X = { props.X }
-            O = { props.O } />
+            O = { props.O }
+            playBtnClicked = { props.playBtnClicked } />
     } else {
         gameStart = <div>Play again</div>
     }

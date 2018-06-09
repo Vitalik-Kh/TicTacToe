@@ -1,0 +1,17 @@
+.PlayBtn {
+    padding: 10px 24px;
+    border-radius: 12px;
+    color: #fff;
+    background: #48b72c;
+    border: none;
+    font-size: 1.6rem;
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.4) inset, 0 0px 3px rgba(0, 0, 0, 0.4);
+    outline: none;
+    font-family: 'Sunflower', sans-serif; 
+    font-weight: bold;
+    cursor: pointer;
+}   
+
+.PlayBtn:active {
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2) inset, 0 0px 2px rgba(0, 0, 0, 0.8);
+}

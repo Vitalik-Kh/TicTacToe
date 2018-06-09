@@ -70,7 +70,7 @@ class Game extends React.Component {
     }
 
     backdropClickHandler = () => {
-        this.setState(prevState => ({showModal: !prevState.showModal}))
+        //this.setState(prevState => ({showModal: !prevState.showModal}))
     }
 
     toggleGameMode = () => {
@@ -100,6 +100,10 @@ class Game extends React.Component {
         }  
     }
 
+    playBtnClickHandler = () => {
+        this.setState({ playing: true, showModal: false });
+    }
+
     render() {
         let gameField = null;
         if (this.state.playing) {
@@ -119,7 +123,8 @@ class Game extends React.Component {
                         toggleGameMode = { this.toggleGameMode }
                         toggleXO = { this.toggleXO }
                         X = { this.state.playerX }
-                        O = { this.state.playerO } />
+                        O = { this.state.playerO }
+                        playBtnClicked = { this.playBtnClickHandler } />
                 </Modal>
                 { gameField }
             </Aux>

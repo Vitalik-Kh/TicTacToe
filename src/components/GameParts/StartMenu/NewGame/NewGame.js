@@ -5,6 +5,7 @@ import Aux from '../../../../hoc/Auxy';
 import TogglePlayers from './Toggle/TogglePlayers';
 import ToggleXO from './Toggle/ToggleXO';
 import {v} from '../../../../utilities/states';
+import Button from '../../../UI/Button/Button';
 
 const newGame = (props) => {
     const singlePlayer = props.X === v.AI || props.O === v.AI ? true : false,
@@ -25,7 +26,9 @@ const newGame = (props) => {
             <p>Players:</p>
             <TogglePlayers singlePlayer = {singlePlayer} clicked = {props.toggleGameMode}/> 
             { toggleXO }
-            <button>PLAY</button>    
+            <div className = { classes.Button }>
+                <Button clicked = {props.playBtnClicked}>PLAY</Button> 
+            </div>    
         </Aux>
     )
 }
