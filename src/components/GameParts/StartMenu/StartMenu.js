@@ -1,11 +1,11 @@
 import React from 'react';
 
 import NewGame from './NewGame/NewGame';
-//import PlayAgain from './PlayAgain/PlayAgain';
+import PlayAgain from './PlayAgain/PlayAgain';
 
 const startMenu = (props) => {
     let gameStart = null;
-    if (true) {
+    if (props.newGame) {
         gameStart = <NewGame 
             toggleGameMode = { props.toggleGameMode }
             toggleXO = { props.toggleXO }
@@ -13,7 +13,9 @@ const startMenu = (props) => {
             O = { props.O }
             playBtnClicked = { props.playBtnClicked } />
     } else {
-        gameStart = <div>Play again</div>
+        gameStart = <PlayAgain
+            playAgainBtnClicked = { props.playAgainBtnClicked }
+            newGameBtnClicked = { props.newGameBtnClicked } />
     }
 
     return (

@@ -20,7 +20,9 @@ class Game extends React.Component {
         winner: null,
         disableInput: true,
         showModal: true,
-        playing: false
+        playing: false,
+        newGame: true,
+        temp: false
     }
 
     componentDidMount = () => {
@@ -60,7 +62,6 @@ class Game extends React.Component {
             const winner = checkForWinner(newSquaresStatus);
         
             this.setState({
-                ...this.state,
                 currentPlayer: nextPlayer,
                 squaresStatus: newSquaresStatus,
                 winner: winner,
@@ -70,7 +71,7 @@ class Game extends React.Component {
     }
 
     backdropClickHandler = () => {
-        //this.setState(prevState => ({showModal: !prevState.showModal}))
+        this.setState(prevState => ({showModal: !prevState.showModal}))
     }
 
     toggleGameMode = () => {
@@ -101,8 +102,38 @@ class Game extends React.Component {
     }
 
     playBtnClickHandler = () => {
-        this.setState({ playing: true, showModal: false });
+        this.setState({ playing: true, showModal: false }) }
+    
+    playAgainBtnClickedHandler = () => {
+        this.setState({
+            currentPlayer: v.X,
+            //X, O or null:
+            squaresStatus: [null, null, null, 
+                            null, null, null, 
+                            null, null, null],
+            winner: null,
+            disableInput: true,
+            showModal: false,
+            playing: true
+        })
     }
+
+    newGameBtnClickedHandler = () => {
+        this.setState({
+            currentPlayer: v.X,
+            //X, O or null:
+            squaresStatus: [null, null, null, 
+                            null, null, null, 
+                            null, null, null],
+            winner: null,
+            disableInput: true,
+            newGame: true
+        })
+    }
+
+    newGameModeOFFtoggle = () => { this.setState({ newGame: false }) }
+
+    showModal = () => { this.setState({ showModal: true, playing: false })}
 
     render() {
         let gameField = null;
@@ -112,21 +143,27 @@ class Game extends React.Component {
                 playerMoveHandler = { this.humanMoveHandler }
                 winner = { this.state.winner }
                 inputDisabled = { this.state.disableInput }
+                showModal = { this.showModal }
             />
         }
         return (
             <Aux>
                 <Modal 
                     visible = { this.state.showModal }
-                    backdropClicked = { this.backdropClickHandler } >
+                    backdropClicked = { this.backdropClickHandler }
+                    onClosed = { this.newGameModeOFFtoggle } >
                     <StartMenu 
                         toggleGameMode = { this.toggleGameMode }
                         toggleXO = { this.toggleXO }
                         X = { this.state.playerX }
                         O = { this.state.playerO }
-                        playBtnClicked = { this.playBtnClickHandler } />
+                        playBtnClicked = { this.playBtnClickHandler }
+                        playAgainBtnClicked = { this.playAgainBtnClickedHandler }
+                        newGameBtnClicked = { this.newGameBtnClickedHandler }
+                        newGame = { this.state.newGame } />
                 </Modal>
                 { gameField }
+                <button onClick = {this.backdropClickHandler}>Click</button>
             </Aux>
             
         )

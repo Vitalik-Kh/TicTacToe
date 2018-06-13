@@ -5,8 +5,18 @@ import PlayerX from '../PlayerX/PlayerX';
 
 const gameSquare = (props) => {
     let player = null;
-    if (props.player == 'X') { player = <PlayerX winner = {props.winner} /> }
-    if (props.player == 'O') { player = <PlayerO winner = {props.winner} /> }
+    if (props.player == 'X') { 
+        player = <PlayerX 
+            winner = { props.winner } 
+            onWinAnimFinish = { props.showModal }
+            canStartNextAnim = { props.canStartNextAnim } /> 
+    }
+    if (props.player == 'O') { 
+        player = <PlayerO 
+            winner = {props.winner}
+            onWinAnimFinish = { props.showModal }
+            canStartNextAnim = { props.canStartNextAnim }  /> 
+    }
     const squareClasses = [classes.GameSquare, classes['Square-' + props.squareID]]
     return (
         <div

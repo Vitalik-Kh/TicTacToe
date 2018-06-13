@@ -16,6 +16,10 @@ const gameField = (props) => {
                 winner = { props.winner ? 
                            props.winner.winIDs.join('').search(id) !== -1 ? true : false :
                            false }
+                canStartNextAnim = { props.winner ?
+                              props.winner.winIDs[0] == id ? true : false :
+                              false }
+                showModal = { props.showModal }
             />
         )
     });

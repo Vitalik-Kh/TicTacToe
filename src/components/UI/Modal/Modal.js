@@ -9,9 +9,12 @@ const modal = (props) => {
     return (
         <Transition 
             timeout = { 400 }
-            in = { props.visible}
+            in = { props.visible }
             unmountOnExit
-            mountOnEnter >
+            mountOnEnter
+            onExited = {() => {
+                props.onClosed()
+            }} >
             {state => {
                 const transClasses = [
                     classes.Modal,
