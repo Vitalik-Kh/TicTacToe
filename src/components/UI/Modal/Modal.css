@@ -9,21 +9,19 @@
 }
 
 .ModalSlideIn {
-    animation: slideIn .4s;
+    animation: scaleIn .4s;
 }
 
 .ModalSlideOut {
-    animation: slideOut .4s forwards;
+    animation: scaleOut .4s forwards;
 }
 
-@keyframes slideIn {
-    0% { top: -50%; opacity: 0; }
-    80% { top: 30%; opacity: 1 }
-    100% { top: 25%; opacity: 1 }
+@keyframes scaleIn {
+    from { transform: scale(0); opacity: 0 }
+    to { transform: scale(1); opacity: 1 }
 }
 
-@keyframes slideOut {
-    0% { top: 25%; opacity: 1 }
-    20% { top: 30%; opacity: 1 }
-    100% { top: -50%; opacity: 0; }
+@keyframes scaleOut {
+    from { transform: scale(1); opacity: 1 }
+    to { transform: scale(0); opacity: 0 }
 }
