@@ -1,12 +1,18 @@
 .PlayerO {
     width: 60%;
     height: 60%;
-    border: 8px solid #fff;
+    border: 8px solid #f83759;
     border-radius: 50%;
+    animation: enterAnim .2s;
 }
 
 .Winner {
     animation: Winner 1.5s;
+}
+
+@keyframes enterAnim {
+    0% {transform: scale(1.1)}
+    100% {transform: scale(1)}
 }
 
 @keyframes Winner {
