@@ -345,5 +345,9 @@ $conf_colors: $conf_blue, $conf_red, $conf_green, $conf_yellow;
     }
 }
 
+@media ( min-width: 390px ) {
+    .PlayAgain { left: 0 }
+}
+
 
 

@@ -1,6 +1,12 @@
 .GameField {
     width: 80vw;
     height: 80vw;
-    margin: 70px auto auto;
+    max-width: 350px; 
+    max-height: 350px;
+    margin: 40px auto auto;
     position: relative;
 }
+
+/* @media ( min-width: 390px ) {
+    .GameField {  }
+} */
