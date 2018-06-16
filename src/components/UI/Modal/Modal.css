@@ -1,8 +1,9 @@
 .Modal {
-    width: 80%;
+    width: 290px;
     position: fixed;
-    top: 20%;
-    left: 10%;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 11;
     background: #fff;
     overflow: hidden;
@@ -17,8 +18,8 @@
 }
 
 @keyframes scaleIn {
-    from { transform: scale(0); opacity: 0 }
-    to { transform: scale(1); opacity: 1 }
+    from { transform: translateX(-50%) scale(0); opacity: 0; }
+    to { transform: translateX(-50%) scale(1); opacity: 1; }
 }
 
 @keyframes fadeOut {

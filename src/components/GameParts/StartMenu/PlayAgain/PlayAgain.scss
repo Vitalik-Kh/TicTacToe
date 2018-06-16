@@ -16,6 +16,7 @@ $conf_colors: $conf_blue, $conf_red, $conf_green, $conf_yellow;
     width: 350px;
     height: 370px;
     overflow: hidden;
+    left: -30px;
 }
 
 @mixin confetti($top, $left, $deg, $color) {
