@@ -11,19 +11,17 @@ const modal = (props) => {
             timeout = { 400 }
             in = { props.visible }
             unmountOnExit
-            mountOnEnter
-            onExited = {() => {
-                props.onClosed()
-            }} >
+            mountOnEnter >
             {state => {
+                console.log(state);
                 const transClasses = [
                     classes.Modal,
-                    state === 'exiting' ? classes.ModalSlideOut : null,
-                    state === 'entering' ? classes.ModalSlideIn : null
+                    state === 'exiting' ? classes.ModalFadeOut : null,
+                    state === 'entering' ? classes.ModalScaleIn : null
                 ];
                 return (
                     <Aux>
-                        <Backdrop clicked = { props.backdropClicked } transState = { state }/>
+                        <Backdrop clicked = { null } transState = { state }/>
                         <div className = { transClasses.join(' ') }>
                             { props.children }
                         </div>

@@ -10,7 +10,11 @@ export const checkForWinner = (arr) => {
         7: [0, 4, 8],
         8: [2, 4, 6]
     }
-    let winner = null;
+    let winner = {
+        winIDs: null,
+        winPlayer: null,
+        draw: false
+    };;
     Object.keys(winCombinations).map(key => {
         const winComb = winCombinations[key];
         if ((arr[winComb[0]] === 'O' || arr[winComb[0]] === 'X') && 
@@ -18,9 +22,17 @@ export const checkForWinner = (arr) => {
              arr[winComb[1]] === arr[winComb[2]]) {
             winner = {
                 winIDs: winComb,
-                winPlayer: arr[winComb[0]]
+                winPlayer: arr[winComb[0]],
+                draw: false
             };
-        }
+        } else if (arr.join('').length === 9) {
+            winner = {
+                winIDs: null,
+                winPlayer: null,
+                draw: true
+            };
+        } 
+        
     });
     return winner;
 }

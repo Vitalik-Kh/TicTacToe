@@ -13,12 +13,12 @@ const gameField = (props) => {
                 player = { props.squaresStatus[id] }
                 clicked = { props.playerMoveHandler } 
                 inputDisabled = { props.inputDisabled }
-                winner = { props.winner ? 
+                winner = { props.winner.winIDs ? 
                            props.winner.winIDs.join('').search(id) !== -1 ? true : false :
-                           false }
-                canStartNextAnim = { props.winner ?
-                              props.winner.winIDs[0] == id ? true : false :
-                              false }
+                           props.winner.draw ? true : false }
+                canTriggerShowModal = { props.winner.winIDs ?
+                                        props.winner.winIDs[0] == id ? true : false :
+                                        props.winner.draw ? id === 0 ? true : false : false }
                 showModal = { props.showModal }
             />
         )

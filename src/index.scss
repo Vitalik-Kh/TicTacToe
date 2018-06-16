@@ -1,10 +1,14 @@
+$light-backgr-color: #6fa6c0;
+$dark-backgr-color: darken($light-backgr-color, 10%);
+
 :global * {
     box-sizing: border-box;
 }
 :global body, :global html {
     margin: 0;
     padding: 0;
-    font-family: 'Sunflower', sans-serif; 
+    font-family: 'Sunflower', sans-serif;
+    background: $light-backgr-color; 
 }
 
 :global #root {
@@ -13,4 +17,5 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
 }

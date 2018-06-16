@@ -7,17 +7,18 @@
     position: relative;
 }
 
-.Line_1 {
+.PlayerX div {
     width: 100%;
-    border: 3px solid #399DB7;
+    border: 4px solid #fff;
     position: absolute;
+    border-radius: 3px;
+}
+
+.Line_1 {
     transform: rotate(45deg);
 }
 
 .Line_2 {
-    width: 100%;
-    border: 3px solid #399DB7;
-    position: absolute;
     transform: rotate(-45deg);
 }
 

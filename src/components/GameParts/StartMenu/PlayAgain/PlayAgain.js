@@ -21,7 +21,7 @@ const playAgain = (props) => {
                     <div>3</div>
                 </div>
             </div>
-            <div className = { [classes.Winner, classes.O].join(' ') }>
+            <div className = { [classes.Winner, classes[props.winner]].join(' ') }>
                 <div></div>
             </div>
             <div className = { classes.Confetti }>

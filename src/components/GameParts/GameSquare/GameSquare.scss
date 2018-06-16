@@ -1,0 +1,47 @@
+$border-color: #45819e;
+$border-width: 3px;
+
+.GameSquare {
+    width: 33.33%;
+    height: 33.33%;
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Square-0 {
+    border-right: solid $border-width $border-color;
+    border-bottom: solid $border-width $border-color;
+}
+
+.Square-1 {
+    border-bottom: solid $border-width $border-color;
+}
+
+.Square-2 {
+    border-left: solid $border-width $border-color;
+    border-bottom: solid $border-width $border-color;
+}
+
+.Square-3 {
+    border-right: solid $border-width $border-color;
+}
+
+.Square-5 {
+    border-left: solid $border-width $border-color;
+}
+
+.Square-6 {
+    border-right: solid $border-width $border-color;
+    border-top: solid $border-width $border-color;
+}
+
+.Square-7 {
+    border-top: solid $border-width $border-color;
+}
+
+.Square-8 {
+    border-left: solid $border-width $border-color;
+    border-top: solid $border-width $border-color;
+}

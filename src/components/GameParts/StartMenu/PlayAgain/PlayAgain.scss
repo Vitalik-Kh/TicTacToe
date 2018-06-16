@@ -1,7 +1,8 @@
-$lightRayColor: #38B5C7;
-$darkRayColor: #028EA2;
+$lightRayColor: #57afd8;
+$darkRayColor: #2b8bb8;
 $podiumShadow: #e2e2e2;
 $podiumColor: #c5c5c5;
+$winnerColor: #2C6CB7;
 
 $conf_blue: #0848CF;
 $conf_red: #E50079;
@@ -124,8 +125,7 @@ $conf_colors: $conf_blue, $conf_red, $conf_green, $conf_yellow;
 
 .Winner {
     position: absolute;
-    font-size: 110px;
-    color: #2C6CB7;
+    color: $winnerColor;
     top: -150px;
     transform: skewX(-5deg);
     animation: winner_enter .9s, winner_float 1s infinite;
@@ -139,7 +139,7 @@ $conf_colors: $conf_blue, $conf_red, $conf_green, $conf_yellow;
     left: 170px;
     div {
         width: 20px;
-        background: #2C6CB7;
+        background: $winnerColor;
         border-radius: 7px;
         position: absolute;
         height: 136px;
@@ -150,7 +150,7 @@ $conf_colors: $conf_blue, $conf_red, $conf_green, $conf_yellow;
     &:after {
         content: '';
         width: 20px;
-        background: #2C6CB7;
+        background: $winnerColor;
         border-radius: 7px;
         position: absolute;
         height: 130px;
@@ -161,7 +161,7 @@ $conf_colors: $conf_blue, $conf_red, $conf_green, $conf_yellow;
     &:before {
         content: '';
         width: 20px;
-        background: #2C6CB7;
+        background: $winnerColor;
         border-radius: 7px;
         position: absolute;
         height: 130px;
@@ -178,9 +178,24 @@ $conf_colors: $conf_blue, $conf_red, $conf_green, $conf_yellow;
         position: absolute;
         height: 130px;
         width: 100px;
-        border: 20px solid #2C6CB7;
+        border: 20px solid $winnerColor;
         border-radius: 50%;
         box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.4);
+    }
+}
+
+.Winner.Draw {
+    left: 69px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 76px;
+    z-index: 10;
+    &:after {
+        content: 'DRAW';
+        position: absolute;
+        top: 20px;
+        left: 0;
+        text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.4);
     }
 }
 
