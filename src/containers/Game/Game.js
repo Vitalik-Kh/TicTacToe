@@ -57,7 +57,7 @@ class Game extends React.Component {
         const AImove = AI(this.state.squaresStatus);
         setTimeout(() => {
             this.playerMove(AImove);
-        }, 600);
+        }, 300);
     }
 
     humanMoveHandler = (squareID) => {

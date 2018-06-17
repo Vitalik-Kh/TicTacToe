@@ -1,4 +1,4 @@
-$light-backgr-color: #6fa6c0;
+$light-backgr-color: #45819e;
 $dark-backgr-color: darken($light-backgr-color, 10%);
 
 :global * {
@@ -17,5 +17,10 @@ $dark-backgr-color: darken($light-backgr-color, 10%);
     display: flex;
     justify-content: center;
     align-items: center;
+}
 
+@media (min-width: 70vh) {
+    :global #root {
+        padding: 24px 0;
+    }
 }

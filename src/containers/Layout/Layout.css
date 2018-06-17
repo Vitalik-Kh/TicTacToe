@@ -3,10 +3,26 @@
     text-align: center;
     color: #fff;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-    margin-top: 40px;
+    margin-top: 0;
 }
 
 .Container {
     width: 100%;
     height: 100%;
+    max-width: 70vh;
+    background: #6fa6c0;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: space-around;
+
 }
+
+@media (min-width: 70vh) {
+    .Container {
+        border-radius: 12px;
+        box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+    }
+}
+
+
