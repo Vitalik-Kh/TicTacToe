@@ -1,0 +1,103 @@
+
+$container-width: 46px;
+$container-padding: 6px;
+
+.ScoreCount_container {
+    width: 80vw;
+    max-width: 350px;
+    margin: 30px auto auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+
+    > div {
+        background: #45819e;
+        height: $container-width + 12px;
+        border-radius: 8px;
+        margin-top: 12px;
+    }
+
+    .PlayersScore {
+        min-width: $container-width*2; 
+        padding: $container-padding;
+        display: flex;
+        align-items: center;
+
+        > div:nth-child(1) {
+            position: relative;
+            height: $container-width - $container-padding * 2;
+            width: $container-width - $container-padding * 2;
+            float: left;
+        }
+
+        > div:nth-child(2) {
+            margin-left: $container-padding;
+            height: $container-width - $container-padding * 2;
+            min-width: $container-width - $container-padding;
+            font-size: $container-width * 0.75;
+            float: left;
+            font-weight: bold;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+    .Draw {
+        order: 1;
+        padding: $container-padding;
+        font-size: $container-width * 0.35;
+        color: #fff;
+        font-weight: bold;
+        display: flex;
+        justify-content: space-around;
+        flex-flow: column;
+        align-items: center;
+
+        div:nth-child(1) { color: rgb(204, 218, 233) }
+
+        div:nth-child(2) {
+            font-size: $container-width * 0.5
+        }
+    }
+}
+
+@media ( min-width: 305px ) {
+    .Draw { order: 0 !important}
+}
+
+@media ( min-width: 400px ) {
+    $container-width: 50px;
+    $container-padding: 8px;
+
+    .ScoreCount_container {
+        > div { 
+            height: $container-width + 12px; 
+        }
+
+        .PlayersScore {
+            width: $container-width*2; 
+            padding: $container-padding;
+
+            > div:nth-child(1) {
+                height: $container-width - $container-padding * 2;
+                width: $container-width - $container-padding * 2;
+            }
+
+            > div:nth-child(2) {
+                margin-left: $container-padding;
+                height: $container-width - $container-padding * 2;
+                min-width: $container-width - $container-padding;
+                font-size: $container-width * 0.75;
+            }
+        }
+
+        .Draw {
+            padding: $container-padding;
+            font-size: $container-width * 0.35;
+        }
+    }
+}
+

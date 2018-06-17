@@ -7,6 +7,7 @@ import Aux from '../../hoc/Auxy';
 import Modal from '../../components/UI/Modal/Modal';
 import StartMenu from '../../components/GameParts/StartMenu/StartMenu';
 import {v} from '../../utilities/states';
+import ScoreCount from '../../components/GameParts/ScoreCount/ScoreCount';
 
 class Game extends React.Component {
     state = {
@@ -23,9 +24,8 @@ class Game extends React.Component {
             draw: false
         },
         disableInput: true,
-        playing: false,
-        // newGame: true,
-        // showModal: true
+        playing: true,
+
     }
 
     componentDidMount = () => {
@@ -141,20 +141,32 @@ class Game extends React.Component {
 
     playingStateToggle = () => { this.setState(prevState => ({ playing: !prevState.playing })) }
 
+    backdropClickHandler = () => {
+        if ( this.state.winner.winIDs || this.state.winner.draw ) {
+            this.playAgainBtnClickedHandler();
+        }
+    }
+
     render() {
         let gameField = null;
         if (this.state.playing) {
-            gameField =  <GameField 
-                squaresStatus = { this.state.squaresStatus }
-                playerMoveHandler = { this.humanMoveHandler }
-                winner = { this.state.winner }
-                inputDisabled = { this.state.disableInput }
-                showModal = { this.playingStateToggle }
-            />
+            gameField =  
+                <Aux>
+                    <GameField 
+                        squaresStatus = { this.state.squaresStatus }
+                        playerMoveHandler = { this.humanMoveHandler }
+                        winner = { this.state.winner }
+                        inputDisabled = { this.state.disableInput }
+                        showModal = { this.playingStateToggle }
+                    />
+                    <ScoreCount />
+                </Aux>
         }
         return (
             <Aux>
-                <Modal visible = { !this.state.playing } >
+                <Modal 
+                    visible = { !this.state.playing }
+                    backdropClicked = { this.backdropClickHandler } >
                     <StartMenu 
                         toggleGameMode = { this.toggleGameModeHandler }
                         toggleXO = { this.toggleXOHandler }

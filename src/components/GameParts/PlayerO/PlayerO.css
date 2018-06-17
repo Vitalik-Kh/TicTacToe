@@ -1,6 +1,6 @@
 .PlayerO {
-    width: 60%;
-    height: 60%;
+    width: 100%;
+    height: 100%;
     border: 8px solid #f83759;
     border-radius: 50%;
     animation: enterAnim .2s;

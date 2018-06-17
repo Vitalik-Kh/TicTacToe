@@ -1,6 +1,6 @@
 .PlayerX {
-    width: 60%;
-    height: 60%;
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,7 +14,7 @@
 }
 
 .PlayerX div {
-    width: 100%;
+    width: 110%;
     border: 4px solid #f8db37;
     position: absolute;
     border-radius: 3px;
