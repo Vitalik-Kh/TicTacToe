@@ -24,8 +24,12 @@ class Game extends React.Component {
             draw: false
         },
         disableInput: true,
-        playing: true,
-
+        playing: false,
+        score: {
+            X: 0,
+            O: 0,
+            draw: 0
+        }
     }
 
     componentDidMount = () => {
@@ -105,6 +109,13 @@ class Game extends React.Component {
         this.setState({ playing: true }) }
     
     playAgainBtnClickedHandler = () => {
+        const newScore = { ...this.state.score };
+        if (this.state.winner.winPlayer) {
+            newScore[this.state.winner.winPlayer] += 1;
+        } else if (this.state.winner.draw) {
+            newScore.draw += 1;
+        }
+        
         this.setState({
             currentPlayer: v.X,
             //X, O or null:
@@ -117,14 +128,16 @@ class Game extends React.Component {
                 draw: false
             },
             disableInput: true,
-            showModal: false,
-            playing: true
+            playing: true,
+            score: {...newScore}
         })
     }
 
     newGameBtnClickedHandler = () => {
         this.setState({
             currentPlayer: v.X,
+            playerX: v.human,
+            playerO: v.AI,
             //X, O or null:
             squaresStatus: [null, null, null, 
                             null, null, null, 
@@ -135,7 +148,12 @@ class Game extends React.Component {
                 draw: false
             },
             disableInput: true,
-            newGame: true
+            playing: false,
+            score: {
+                X: 0,
+                O: 0,
+                draw: 0
+            }
         })
     }
 
@@ -159,7 +177,7 @@ class Game extends React.Component {
                         inputDisabled = { this.state.disableInput }
                         showModal = { this.playingStateToggle }
                     />
-                    <ScoreCount />
+                    <ScoreCount score = { this.state.score }/>
                 </Aux>
         }
         return (

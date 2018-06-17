@@ -25,7 +25,6 @@ export const checkForWinner = (arr) => {
                 winPlayer: arr[winComb[0]],
                 draw: false
             };
-            console.log('winner');
         } else if ( arr.join('').length === 9 && !winner.winIDs ) {
             winner = {
                 winIDs: null,

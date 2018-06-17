@@ -7,24 +7,16 @@ const scoreCount = (props) => {
     return (
         <div className = { classes.ScoreCount_container }>
             <div className = { classes.PlayersScore }>
-                <div>
-                    <PlayerX />
-                </div>
-                <div>
-                    12
-                </div>
+                <div> <PlayerX /> </div>
+                <div> { props.score.X } </div>
             </div>
             <div className = { classes.Draw } >
-                <div>DRAW</div>
-                <div>3</div>
+                <div> DRAW </div>
+                <div> { props.score.draw } </div>
             </div>
             <div  className = { classes.PlayersScore } >
-                <div>
-                    <PlayerO />
-                </div>
-                <div>
-                    5
-                </div>
+                <div> <PlayerO /> </div>
+                <div> { props.score.O } </div>
             </div>
         </div>
     );
