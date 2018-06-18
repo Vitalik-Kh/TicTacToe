@@ -30,3 +30,10 @@
 @media ( min-width: 390px ) {
     .Modal { width: 350px }
 }
+
+@media screen and (max-height: 480px) {
+    .Modal {
+        top: -32px;
+        transform: scale(0.7) translateX(-70%);;
+    }
+}
