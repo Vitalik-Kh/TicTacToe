@@ -2,9 +2,9 @@ const autoprefixer = require('autoprefixer');
 const htmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    devtool: 'cheap-module-eval-source-map',
+    devtool: 'cheap-module-source-map',
 
-    //can be omitted so webpack will automaticly see files with this extensions:
+    //(can be omitted) webpack will automaticly see files with this extensions:
     resolve: {
        extensions: [".js", ".jsx"]
     },
