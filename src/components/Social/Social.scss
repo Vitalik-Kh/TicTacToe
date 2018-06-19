@@ -1,0 +1,20 @@
+.Social {
+
+
+    a {
+        margin: 0 12px;
+        color: #30576b;
+        font-size: 1.3rem;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all .3s;
+
+        &:hover {
+            color: #3f728b;
+        }
+
+        &:active {
+            color: #3f728b;
+        }
+    }
+}
