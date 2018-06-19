@@ -19,9 +19,11 @@ $container-padding: 6px;
 
     .PlayersScore {
         min-width: $container-width*2; 
-        padding: $container-padding;
+        padding: 0 $container-padding;
         display: flex;
         align-items: center;
+        border-bottom: 6px solid transparent;
+        border-top: 6px solid transparent;
 
         > div:nth-child(1) {
             position: relative;
@@ -42,6 +44,13 @@ $container-padding: 6px;
             justify-content: center;
             align-items: center;
         }
+    }
+
+    .CurrentPlayerX {
+        box-shadow: 0 2px 0 3px rgba(#f8db37, .7);
+    }
+    .CurrentPlayerO {
+        box-shadow: 0 2px 0 3px rgba(#d46f82, .7);
     }
 
     .Draw {
@@ -78,7 +87,7 @@ $container-padding: 6px;
 
         .PlayersScore {
             width: $container-width*2; 
-            padding: $container-padding;
+            padding: 0 $container-padding;
 
             > div:nth-child(1) {
                 height: $container-width - $container-padding * 2;

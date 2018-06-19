@@ -179,7 +179,9 @@ class Game extends React.Component {
                         inputDisabled = { this.state.disableInput }
                         showModal = { this.playingStateToggle }
                     />
-                    <ScoreCount score = { this.state.score }/>
+                    <ScoreCount 
+                        score = { this.state.score } 
+                        currentPlayer = { this.state.currentPlayer } />
                 </Aux>
         }
         return (
