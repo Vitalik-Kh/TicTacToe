@@ -1,5 +1,102 @@
+import {v} from '../utilities/states';
 
-const ai = (field) => {
+const ai = (field, player) => {
+    const playWith = 'O';
+    const enemy = player === v.X ? v.O : v.X;
+    const  fieldCombinationsIndexes = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6]
+    ]
+
+    const makeOrPreventWinMove = () => {
+        let nextWinMove = null;
+        let nextPreventiveMove = null;
+        
+        fieldCombinationsIndexes.forEach(combination => {
+            let fieldCombination = [];
+            combination.forEach(ID => {
+                fieldCombination.push(field[ID]);
+            })
+            const fieldCombination_string = fieldCombination.join('');
+            const matchedCombination_enemy = player === v.X ? 
+                                             fieldCombination_string.match(/O/g) : 
+                                             fieldCombination_string.match(/X/g);
+            const matchedCombination_player = player === v.X ? 
+                                              fieldCombination_string.match(/X/g) : 
+                                              fieldCombination_string.match(/O/g);
+            if (fieldCombination_string && matchedCombination_enemy) {
+                if ( matchedCombination_enemy.length === 2 &&
+                     fieldCombination_string.length === 2 ) {
+                    combination.forEach(ID => {
+                        if (field[ID] == null) {
+                            nextPreventiveMove = ID;
+                        } 
+                    })
+                }
+            } else if (fieldCombination_string && matchedCombination_player) {
+                if ( matchedCombination_player.length === 2 &&
+                     fieldCombination_string.length === 2 ) {
+                    combination.forEach(ID => {
+                        if (field[ID] == null) {
+                            nextWinMove = ID;
+                        } 
+                    })
+                }
+            }
+        });
+        return nextWinMove ? nextWinMove : nextPreventiveMove;
+    }
+
+    const centerSquareMove = () => {
+        let nextMove = null;
+        if (field[4] === null) {
+            nextMove = 4;
+        }
+        return nextMove;
+    }
+
+    //last move in a line without result
+    const getDeadMoves = () => {
+        const deadMoves = [];
+        fieldCombinationsIndexes.forEach(combination => {
+            let fieldCombination = [];
+            combination.forEach(ID => {
+                fieldCombination.push(field[ID]);
+            })
+            const fieldCombination_string = fieldCombination.join('');
+            const matchedCombination = fieldCombination_string.match(/(O{1}X{1})|(X{1}O{1})/g);
+            if (fieldCombination_string && matchedCombination) {
+                if ( matchedCombination.join('').length === 2 &&
+                     fieldCombination_string.length === 2 ) {
+                    combination.forEach(ID => {
+                        if (field[ID] == null) {
+                            deadMoves.push(ID);
+                        } 
+                    })
+                }
+            } 
+        });
+        return deadMoves.length > 0 ? deadMoves : null;
+    }
+
+    const preventDeadMoves = (possibleMoveIDs) => {
+        if (getDeadMoves()) {
+            return possibleMoveIDs.filter(ID => {
+                if (getDeadMoves().findIndex(el => el === ID) !== -1) {
+                    return false
+                } else { return true }
+            })
+        }
+
+        return possibleMoveIDs;
+    }
+
     const getPossibleMoves = () => {
         const possibleMoveIDs = [];
         for (let i=0; i<field.length; i++) {
@@ -11,7 +108,13 @@ const ai = (field) => {
     }
 
     const makeMove = () => {
-        const possibleMoveIDs = getPossibleMoves();
+        if (makeOrPreventWinMove() !== null) {
+            return makeOrPreventWinMove();
+        }
+        if (centerSquareMove()) {
+            return centerSquareMove();
+        }
+        let possibleMoveIDs = preventDeadMoves(getPossibleMoves());   
         const randomIndex = Math.round(Math.random() * (possibleMoveIDs.length-1));
         return possibleMoveIDs[randomIndex];
     }
