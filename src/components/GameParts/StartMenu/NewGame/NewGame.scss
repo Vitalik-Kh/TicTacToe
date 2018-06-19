@@ -16,3 +16,26 @@
     background: radial-gradient(circle farthest-corner, #7eaaaf, #48709e);
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2) inset;
 }
+
+.ToggleXO_container {
+    transition: all .4s;
+    overflow: hidden;
+
+}
+
+.ToggleXO_slideUp {
+    animation: slideUp .4s forwards;
+}
+.ToggleXO_slideDown {
+    animation: slideDown .4s forwards;
+}
+
+@keyframes slideUp {
+    from { height: 108px; opacity: 1 }
+    to { height: 0; opacity: 0 }
+}
+
+@keyframes slideDown {
+    from { height: 0; opacity: 0 }
+    to { height: 108px; opacity: 1 }
+}

@@ -1,6 +1,5 @@
 const autoprefixer = require('autoprefixer');
 const htmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     devtool: 'cheap-module-eval-source-map',
@@ -24,7 +23,6 @@ module.exports = {
                     { 
                         loader: 'css-loader',
                         options: {
-                            //next line inforsm css-loader about existance of 1 loader before it
                             importLoaders: 1,
                             modules: true,
                             localIdentName: '[name]__[local]__[hash:base64:5]'
@@ -34,14 +32,14 @@ module.exports = {
                         loader: 'postcss-loader',
                         options: {
                             ident: 'postcss',
-                            plugins: () => {
+                            plugins: () => [
                                 autoprefixer({
                                     "browsers": [
                                         ">1%",
-                                        "last 2 versions"
+                                        "last 3 versions"
                                     ]
                                 })
-                            }
+                            ]
                         }
                     }
                 ]
@@ -54,7 +52,6 @@ module.exports = {
                     { 
                         loader: 'css-loader',
                         options: {
-                            //next line inforsm css-loader about existance of 1 loader before it
                             importLoaders: 1,
                             modules: true,
                             localIdentName: '[name]__[local]__[hash:base64:5]'
@@ -64,14 +61,14 @@ module.exports = {
                         loader: 'postcss-loader',
                         options: {
                             ident: 'postcss',
-                            plugins: () => {
+                            plugins: () => [
                                 autoprefixer({
                                     "browsers": [
                                         ">1%",
-                                        "last 2 versions"
+                                        "last 3 versions"
                                     ]
                                 })
-                            }
+                            ]
                         }
                     },
                     {loader: 'sass-loader'}

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import classes from './PlayerX.css';
+import classes from './PlayerX.scss';
 import { Transition } from 'react-transition-group';
 
 const playerX = (props) => {
