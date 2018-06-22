@@ -86,9 +86,10 @@ const ai = (field, player) => {
     }
 
     const preventDeadMoves = (possibleMoveIDs) => {
-        if (getDeadMoves()) {
+        const getDeadMoves_data = getDeadMoves();
+        if (getDeadMoves_data) {
             return possibleMoveIDs.filter(ID => {
-                if (getDeadMoves().findIndex(el => el === ID) !== -1) {
+                if (getDeadMoves_data.findIndex(el => el === ID) !== -1) {
                     return false
                 } else { return true }
             })
@@ -97,36 +98,13 @@ const ai = (field, player) => {
         return possibleMoveIDs;
     }
 
-    const secondInLineMove = () => {
-        fieldCombinationsIndexes.forEach(combination => {
-            let fieldCombination = [];
-            combination.forEach(ID => {
-                fieldCombination.push(field[ID]);
-            })
-            const fieldCombination_string = fieldCombination.join('');
-            const matchedCombination = player === v.X ? 
-                                       fieldCombination_string.match(/X/g) : 
-                                       fieldCombination_string.match(/O/g);
-            if (fieldCombination_string && matchedCombination) {
-                if ( matchedCombination.join('').length === 1 &&
-                     fieldCombination_string.length === 1 ) {
-                    combination.forEach(ID => {
-                        if (field[ID] == null) {
-                            deadMoves.push(ID);
-                        } 
-                    })
-                }
-            } 
-        });
-    }
-
     const moveIfEnemyInCenterSquare = () => {
         let nextMoves = null, nextMove = null;
         if ( field[4] === enemy) {
             nextMoves = [0, 2, 6, 8];
-
-            const randomIndex = Math.floor(Math.random() * nextMoves.length);
-            nextMove = nextMoves[randomIndex];
+            const validNextMoves = validateNextMoves(nextMoves);
+            const randomIndex = Math.floor(Math.random() * validNextMoves.length);
+            nextMove = validNextMoves[randomIndex];
         }
         return nextMove;
     }
@@ -136,17 +114,68 @@ const ai = (field, player) => {
         if ( (field[0] === enemy && field[8] === enemy) ||
               field[2] === enemy && field[6] === enemy) {
             nextMoves = [1, 3, 5, 7];
-            const randomIndex = Math.floor(Math.random() * nextMoves.length);
-            nextMove = nextMoves[randomIndex];
+            const validNextMoves = validateNextMoves(nextMoves);
+            const randomIndex = Math.floor(Math.random() * validNextMoves.length);
+            nextMove = validNextMoves[randomIndex];
         }
         return nextMove;
     }
 
+    //when enemy placed both sides of one corner
+    const getBadMoveIfEnemeyInArrowPosition = () => {
+        let badMove = null;
+        const arrowIndexCombinations = [
+            [6, 3, 0, 1, 2],
+            [0, 1, 2, 5, 8],
+            [2, 5, 8, 7, 6],
+            [8, 7, 6, 3, 0]
+        ];
+        arrowIndexCombinations.forEach(indexComb => {
+            const fieldCombination = indexComb.map(i => {
+                return field[i]; }).join('');
+            const re = player === v.X ? /\w*O\w*O\w*/ : /\w*X\w*X\w*/;
+            if (fieldCombination.search(re) !== -1) {
+                console.log(indexComb,'indexComb');
+                switch(indexComb[2]) {
+                    case 0:
+                        badMove = 8;
+                        break;
+                    case 8:
+                        badMove = 0;
+                        break;
+                    case 2:
+                        badMove = 6;
+                        break;
+                    case 6:
+                        badMove = 2;
+                    default:
+                        badMove = null;
+                }
+            }
+        });
+        console.log(badMove, 'badMove');
+        return badMove;
+    }
+
+    const moveIfEnemeyInArrowPosition = () => {
+        let nextMove = null;
+        const possibleMoves = preventDeadMoves(getPossibleMoves());
+        const badMove = getBadMoveIfEnemeyInArrowPosition();
+        if (badMove !== null) {
+            const nextMoves =  possibleMoves.filter(move => move !== badMove )
+            console.log(nextMoves,'nextMoves');
+            const validNextMoves = validateNextMoves(nextMoves);
+            const randomIndex = Math.floor(Math.random() * validNextMoves.length);
+            nextMove = validNextMoves[randomIndex]; 
+        }
+        return nextMove;
+    }
+
+
     const validateNextMoves = (nextMoves) => {
         const validNextMoves = nextMoves.filter(move => {
-            return field(move) == null ? true : false;
+            return field[move] == null ? true : false;
         });
-        console.log(validNextMoves);
         return validNextMoves;
     }
 
@@ -162,6 +191,7 @@ const ai = (field, player) => {
 
     const makeMove = () => {
         const makeOrPreventWinMove_data = makeOrPreventWinMove();
+        let possibleMoves = getPossibleMoves();
         if (makeOrPreventWinMove_data !== null) {
             console.log('makeOrPreventWinMove');
             return makeOrPreventWinMove_data;
@@ -181,7 +211,13 @@ const ai = (field, player) => {
             console.log('moveIfEnemyInTwoOppositeCorners');
             return moveIfEnemyInTwoOppositeCorners_data;
         }
-        let possibleMoveIDs = preventDeadMoves(getPossibleMoves());   
+        const moveIfEnemeyInArrowPosition_data = moveIfEnemeyInArrowPosition();
+        if (moveIfEnemeyInArrowPosition_data !== null) {
+            console.log('moveIfEnemeyInArrowPosition_data');
+            return moveIfEnemeyInArrowPosition_data;
+        } 
+
+        let possibleMoveIDs = preventDeadMoves(possibleMoves);   
         const randomIndex = Math.round(Math.random() * (possibleMoveIDs.length-1));
         console.log('random move');
         return possibleMoveIDs[randomIndex];
