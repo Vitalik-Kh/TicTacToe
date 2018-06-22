@@ -50,7 +50,7 @@ const ai = (field, player) => {
                 }
             }
         });
-        return nextWinMove ? nextWinMove : nextPreventiveMove;
+        return nextWinMove !== null ? nextWinMove : nextPreventiveMove;
     }
 
     const centerSquareMove = () => {
@@ -97,6 +97,59 @@ const ai = (field, player) => {
         return possibleMoveIDs;
     }
 
+    const secondInLineMove = () => {
+        fieldCombinationsIndexes.forEach(combination => {
+            let fieldCombination = [];
+            combination.forEach(ID => {
+                fieldCombination.push(field[ID]);
+            })
+            const fieldCombination_string = fieldCombination.join('');
+            const matchedCombination = player === v.X ? 
+                                       fieldCombination_string.match(/X/g) : 
+                                       fieldCombination_string.match(/O/g);
+            if (fieldCombination_string && matchedCombination) {
+                if ( matchedCombination.join('').length === 1 &&
+                     fieldCombination_string.length === 1 ) {
+                    combination.forEach(ID => {
+                        if (field[ID] == null) {
+                            deadMoves.push(ID);
+                        } 
+                    })
+                }
+            } 
+        });
+    }
+
+    const moveIfEnemyInCenterSquare = () => {
+        let nextMoves = null, nextMove = null;
+        if ( field[4] === enemy) {
+            nextMoves = [0, 2, 6, 8];
+
+            const randomIndex = Math.floor(Math.random() * nextMoves.length);
+            nextMove = nextMoves[randomIndex];
+        }
+        return nextMove;
+    }
+
+    const moveIfEnemyInTwoOppositeCorners = () => {
+        let nextMoves = null, nextMove = null;
+        if ( (field[0] === enemy && field[8] === enemy) ||
+              field[2] === enemy && field[6] === enemy) {
+            nextMoves = [1, 3, 5, 7];
+            const randomIndex = Math.floor(Math.random() * nextMoves.length);
+            nextMove = nextMoves[randomIndex];
+        }
+        return nextMove;
+    }
+
+    const validateNextMoves = (nextMoves) => {
+        const validNextMoves = nextMoves.filter(move => {
+            return field(move) == null ? true : false;
+        });
+        console.log(validNextMoves);
+        return validNextMoves;
+    }
+
     const getPossibleMoves = () => {
         const possibleMoveIDs = [];
         for (let i=0; i<field.length; i++) {
@@ -108,14 +161,29 @@ const ai = (field, player) => {
     }
 
     const makeMove = () => {
-        if (makeOrPreventWinMove() !== null) {
-            return makeOrPreventWinMove();
+        const makeOrPreventWinMove_data = makeOrPreventWinMove();
+        if (makeOrPreventWinMove_data !== null) {
+            console.log('makeOrPreventWinMove');
+            return makeOrPreventWinMove_data;
         }
-        if (centerSquareMove()) {
-            return centerSquareMove();
+        const centerSquareMove_data = centerSquareMove();
+        if (centerSquareMove_data) {
+            console.log('centerSquareMove');
+            return centerSquareMove_data;
+        }
+        const moveIfEnemyInCenterSquare_data = moveIfEnemyInCenterSquare();
+        if (moveIfEnemyInCenterSquare_data !== null) {
+            console.log('moveIfEnemyInCenterSquare');
+            return moveIfEnemyInCenterSquare_data; 
+        }
+        const moveIfEnemyInTwoOppositeCorners_data = moveIfEnemyInTwoOppositeCorners();
+        if (moveIfEnemyInTwoOppositeCorners_data !== null) {
+            console.log('moveIfEnemyInTwoOppositeCorners');
+            return moveIfEnemyInTwoOppositeCorners_data;
         }
         let possibleMoveIDs = preventDeadMoves(getPossibleMoves());   
         const randomIndex = Math.round(Math.random() * (possibleMoveIDs.length-1));
+        console.log('random move');
         return possibleMoveIDs[randomIndex];
     }
 
