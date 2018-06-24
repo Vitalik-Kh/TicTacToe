@@ -1,7 +1,7 @@
 import React from 'react';
 
 import GameField from '../../components/GameParts/GameField';
-import AI from '../../AI/AI';
+import AI, {AIobj} from '../../AI/AI';
 import {checkForWinner} from '../../utilities/checkForWinner';
 import Aux from '../../hoc/Auxy';
 import Modal from '../../components/UI/Modal/Modal';
@@ -53,7 +53,7 @@ class Game extends React.Component {
         }
     }
 
-    aiMove = () => {            
+    aiMove = () => {
         const AImove = AI(this.state.squaresStatus, 
                           this.state.playerX === v.human ? v.O : v.X);
         setTimeout(() => {
