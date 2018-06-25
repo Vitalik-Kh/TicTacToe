@@ -1,5 +1,5 @@
 import {v} from '../../utilities/states';
-import preventDeadMoves from './preventDeadMoves';
+import preventDeadMoves from '../utility/preventDeadMoves';
 import getPossibleMoves from '../utility/getPossibleMoves';
 
 const moveIfEnemeyInArrowPosition = (data) => {

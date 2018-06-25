@@ -3,7 +3,7 @@ const preventDeadMoves = (data, possibleMoveIDs) => {
     //last move in a line without result
     const getDeadMoves = () => {
         const deadMoves = [];
-        data.fieldCombinationsIndexes.forEach(combination => {
+        data.winCombinationsIDs.forEach(combination => {
             let fieldCombination = [];
             combination.forEach(ID => {
                 fieldCombination.push(data.field[ID]);

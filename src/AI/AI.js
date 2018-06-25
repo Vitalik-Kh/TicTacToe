@@ -8,12 +8,12 @@ import moveIfEnemeyInArrowPosition from './AImethods/moveIfEnemyInArrowPosition'
 import makeSecondInLineMove from './AImethods/makeSecondInLineMove';
 import makeRandomMove from './AImethods/makeRandomMove';
 
-const ai = (field, player, level) => {
+const ai = (field, player, level = 'impossible') => {
     const aiState = {
         field: field,
         player: player,
         enemy: player === v.X ? v.O : v.X,
-        fieldCombinationsIndexes:[
+        winCombinationsIDs:[
             [0, 1, 2],
             [3, 4, 5],
             [6, 7, 8],
@@ -25,12 +25,29 @@ const ai = (field, player, level) => {
         ]
     };
 
-    const makeMove = () => {
-        const makeOrPreventWinMove_data = makeOrPreventWinMove(aiState);
+    const easyLevelMoves = () => {
+        let makeOrPreventWinMove_data = makeOrPreventWinMove(aiState);
+        if (level === 'easy') {
+            const random = Math.floor(Math.random() * 2);
+            if (!random) { makeOrPreventWinMove_data = null }
+        }
         if (makeOrPreventWinMove_data !== null) {
             console.log('makeOrPreventWinMove');
             return makeOrPreventWinMove_data;
         }
+        return null;
+    }
+ 
+    const normalLevelMoves = () => {
+        const makeSecondInLineMove_data = makeSecondInLineMove(aiState);
+        if (makeSecondInLineMove_data !== null) {
+            console.log('makeSecondInLineMove');
+            return makeSecondInLineMove_data;
+        }
+        return null;
+    }
+
+    const impossibleLevelMoves = () => {
         const centerSquareMove_data = centerSquareMove(aiState);
         if (centerSquareMove_data) {
             console.log('centerSquareMove');
@@ -51,17 +68,32 @@ const ai = (field, player, level) => {
         if (moveIfEnemeyInArrowPosition_data !== null) {
             console.log('moveIfEnemeyInArrowPosition_data');
             return moveIfEnemeyInArrowPosition_data;
-        } 
-        const makeSecondInLineMove_data = makeSecondInLineMove(aiState);
-        if (makeSecondInLineMove_data !== null) {
-            console.log('makeSecondInLineMove');
-            return makeSecondInLineMove_data;
-        }
-
-        return makeRandomMove(aiState);
-        
+        }  
+        return null;
     }
-    
+
+    const makeMove = () => {
+        if (level === 'easy' ||
+            level === 'normal' || 
+            level === 'impossible') { 
+            
+            const easyLevelMove = easyLevelMoves();
+            if (easyLevelMove !== null) { return easyLevelMove } 
+        }       
+        if (level === 'impossible') { 
+            const impossibleLevelMove = impossibleLevelMoves();
+            if (impossibleLevelMove !== null) { return impossibleLevelMove }
+        }  
+        if (level === 'normal' || 
+            level === 'impossible') { 
+            
+            const noramlLevelMove = normalLevelMoves();
+            if (noramlLevelMove !== null) { return noramlLevelMove } 
+        }
+        
+        return makeRandomMove(aiState); 
+    }
+
     return makeMove();
 }
 

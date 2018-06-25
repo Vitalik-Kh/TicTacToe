@@ -4,8 +4,8 @@ const makeOrPreventWinMove = (data) => {
     let nextWinMove = null;
     let nextPreventiveMove = null;
     
-    data.fieldCombinationsIndexes.forEach(combination => {
-        let fieldCombination = [];
+    data.winCombinationsIDs.forEach(combination => {
+        const fieldCombination = [];
         combination.forEach(ID => {
             fieldCombination.push(data.field[ID]);
         })

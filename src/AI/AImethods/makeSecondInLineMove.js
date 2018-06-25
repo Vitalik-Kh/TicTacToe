@@ -3,7 +3,7 @@ import {v} from '../../utilities/states';
 const makeSecondInLineMove = (data) => {
     const getSecondInLineMoves = () => {
         const nextMoves = [];
-        data.fieldCombinationsIndexes.forEach(combination => {
+        data.winCombinationsIDs.forEach(combination => {
             let fieldCombination = [];
             combination.forEach(ID => {
                 fieldCombination.push(data.field[ID]);

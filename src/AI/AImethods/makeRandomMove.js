@@ -1,5 +1,5 @@
 import getPossibleMoves from '../utility/getPossibleMoves';
-import preventDeadMoves from './preventDeadMoves';
+import preventDeadMoves from '../utility/preventDeadMoves';
 
 const makeRandomMove = (data) => {
     let nextMove = null, nextMoves = null;
