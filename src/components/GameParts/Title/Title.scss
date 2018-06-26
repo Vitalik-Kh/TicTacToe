@@ -1,0 +1,48 @@
+.Title {
+    font-family: 'Bowlby One SC', cursive;
+    text-align: center;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    margin: 0;
+    position: relative;
+}
+
+%levels {
+    font-family: 'Sunflower', sans-serif;
+    font-size: 0.9rem;
+    font-weight: bold;
+    position: absolute;
+    top: 0;
+    text-shadow: initial;
+}
+
+.NormalLevel {
+    &:after {
+        @extend %levels;
+        content: 'normal';
+        color: #f5e8a3;
+        right: -50px;
+        
+    }
+}
+
+.EasyLevel {
+    &:after {
+        @extend %levels;
+        content: 'easy';
+        color: rgb(172, 231, 149);
+        right: -34px;
+
+        
+    }
+}
+
+.HardLevel {
+    &:after {
+        @extend %levels;
+        content: 'hard';
+        color: #eeb9c3;
+        right: -34px;
+        
+    }
+}

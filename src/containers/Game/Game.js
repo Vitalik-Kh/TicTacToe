@@ -8,6 +8,7 @@ import Modal from '../../components/UI/Modal/Modal';
 import StartMenu from '../../components/GameParts/StartMenu/StartMenu';
 import {v} from '../../utilities/states';
 import ScoreCount from '../../components/GameParts/ScoreCount/ScoreCount';
+import Title from '../../components/GameParts/Title/Title';
 
 class Game extends React.Component {
     state = {
@@ -181,6 +182,7 @@ class Game extends React.Component {
         if (this.state.playing) {
             gameField =  
                 <Aux>
+                    <Title level = { this.state.level } />
                     <GameField 
                         squaresStatus = { this.state.squaresStatus }
                         playerMoveHandler = { this.humanMoveHandler }
