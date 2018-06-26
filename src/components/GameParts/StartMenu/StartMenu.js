@@ -11,7 +11,9 @@ const startMenu = (props) => {
             toggleXO = { props.toggleXO }
             X = { props.X }
             O = { props.O }
-            playBtnClicked = { props.playBtnClicked } />
+            playBtnClicked = { props.playBtnClicked }
+            level = { props.level }
+            changeLevel = { props.changeLevel } />
     } else if ( !props.playing && (props.winner.winIDs || props.winner.draw) ) {
         gameStart = <PlayAgain
             playAgainBtnClicked = { props.playAgainBtnClicked }

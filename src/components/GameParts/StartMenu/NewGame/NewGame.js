@@ -5,8 +5,8 @@ import TogglePlayers from './Toggle/TogglePlayers';
 import ToggleXO from './Toggle/ToggleXO';
 import {v} from '../../../../utilities/states';
 import Button from '../../../UI/Button/Button';
-import Aux from '../../../../hoc/Auxy';
 import { Transition } from 'react-transition-group';
+import GameLevels from './GameLevels/GameLevels';
 
 const newGame = (props) => {
     const singlePlayer = props.X === v.AI || props.O === v.AI ? true : false,
@@ -33,6 +33,10 @@ const newGame = (props) => {
                     )
                 }}
             </Transition>
+            <div>
+                <p>Difficulty level:</p>
+                <GameLevels level={ props.level } clicked = { props.changeLevel }/>
+            </div>
             <div className = { classes.Button }>
                 <Button clicked = {props.playBtnClicked}>PLAY</Button> 
             </div>    

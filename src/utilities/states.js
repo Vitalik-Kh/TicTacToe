@@ -4,5 +4,9 @@ export const v = {
     AI: 'AI',
     human: 'human',
     playAgain: 'playAgain',
-    newGame: 'newGame'
+    newGame: 'newGame',
+    //game levels
+    easy: 'easy',
+    normal: 'normal',
+    hard: 'hard'
 }

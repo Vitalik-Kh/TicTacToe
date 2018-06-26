@@ -12,6 +12,7 @@ import ScoreCount from '../../components/GameParts/ScoreCount/ScoreCount';
 class Game extends React.Component {
     state = {
         currentPlayer: v.X,
+        level: v.normal,
         playerX: v.human,
         playerO: v.AI,
         //X, O or null:
@@ -55,7 +56,8 @@ class Game extends React.Component {
 
     aiMove = () => {
         const AImove = AI(this.state.squaresStatus, 
-                          this.state.playerX === v.human ? v.O : v.X);
+                          this.state.playerX === v.human ? v.O : v.X,
+                          this.state.level);
         setTimeout(() => {
             this.playerMove(AImove);
         }, 300);
@@ -168,6 +170,12 @@ class Game extends React.Component {
         }
     }
 
+    changeLevelHandler = (newLevel) => {
+        if (newLevel !== this.state.level) {
+            this.setState({ level: newLevel });
+        }
+    }
+
     render() {
         let gameField = null;
         if (this.state.playing) {
@@ -199,7 +207,9 @@ class Game extends React.Component {
                         playAgainBtnClicked = { this.playAgainBtnClickedHandler }
                         newGameBtnClicked = { this.newGameBtnClickedHandler }
                         playing = { this.state.playing }
-                        winner = { this.state.winner } />
+                        winner = { this.state.winner }
+                        level = { this.state.level }
+                        changeLevel = { this.changeLevelHandler } />
                 </Modal>
                 { gameField }
             </Aux>

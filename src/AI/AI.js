@@ -8,7 +8,7 @@ import moveIfEnemeyInArrowPosition from './AImethods/moveIfEnemyInArrowPosition'
 import makeSecondInLineMove from './AImethods/makeSecondInLineMove';
 import makeRandomMove from './AImethods/makeRandomMove';
 
-const ai = (field, player, level = 'impossible') => {
+const ai = (field, player, level = 'normal') => {
     const aiState = {
         field: field,
         player: player,
@@ -47,7 +47,7 @@ const ai = (field, player, level = 'impossible') => {
         return null;
     }
 
-    const impossibleLevelMoves = () => {
+    const hardLevelMoves = () => {
         const centerSquareMove_data = centerSquareMove(aiState);
         if (centerSquareMove_data) {
             console.log('centerSquareMove');
@@ -75,17 +75,17 @@ const ai = (field, player, level = 'impossible') => {
     const makeMove = () => {
         if (level === 'easy' ||
             level === 'normal' || 
-            level === 'impossible') { 
+            level === 'hard') { 
             
             const easyLevelMove = easyLevelMoves();
             if (easyLevelMove !== null) { return easyLevelMove } 
         }       
-        if (level === 'impossible') { 
-            const impossibleLevelMove = impossibleLevelMoves();
-            if (impossibleLevelMove !== null) { return impossibleLevelMove }
+        if (level === 'hard') { 
+            const hardLevelMove = hardLevelMoves();
+            if (hardLevelMove !== null) { return hardLevelMove }
         }  
         if (level === 'normal' || 
-            level === 'impossible') { 
+            level === 'hard') { 
             
             const noramlLevelMove = normalLevelMoves();
             if (noramlLevelMove !== null) { return noramlLevelMove } 
