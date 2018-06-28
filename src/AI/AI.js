@@ -7,6 +7,7 @@ import moveIfEnemyInTwoOppositeCorners from './AImethods/moveIfEnemyInTwoOpposit
 import moveIfEnemeyInArrowPosition from './AImethods/moveIfEnemyInArrowPosition';
 import makeSecondInLineMove from './AImethods/makeSecondInLineMove';
 import makeRandomMove from './AImethods/makeRandomMove';
+import makeArrowMovesCombination from './AImethods/makeArrowMovesCombination';
 
 const ai = (field, player, level = 'normal') => {
     const aiState = {
@@ -48,6 +49,7 @@ const ai = (field, player, level = 'normal') => {
     }
 
     const hardLevelMoves = () => {
+        //if center square is free, move there
         const centerSquareMove_data = centerSquareMove(aiState);
         if (centerSquareMove_data) {
             console.log('centerSquareMove');

@@ -35,6 +35,7 @@ class Game extends React.Component {
     }
 
     componentDidMount = () => {
+        console.log('componentDidMount');
         this.myComponentDidMountOrUpdate();
     }
 
