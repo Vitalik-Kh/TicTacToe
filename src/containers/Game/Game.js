@@ -1,7 +1,7 @@
 import React from 'react';
 
 import GameField from '../../components/GameParts/GameField';
-import AI, {AIobj} from '../../AI/AI';
+import AI from '../../AI/Index';
 import {checkForWinner} from '../../utilities/checkForWinner';
 import Aux from '../../hoc/Auxy';
 import Modal from '../../components/UI/Modal/Modal';
@@ -57,11 +57,10 @@ class Game extends React.Component {
     }
 
     aiMove = () => {
-        const AImove = AI(this.state.squaresStatus, 
-                          this.state.playerX === v.human ? v.O : v.X,
-                          this.state.level);
         setTimeout(() => {
-            this.playerMove(AImove);
+            const pos = AI.makeMove(this.state.squaresStatus);
+            console.log(pos);
+            this.playerMove(pos);
         }, 300);
     }
 
@@ -113,6 +112,9 @@ class Game extends React.Component {
     }
 
     playBtnClickHandler = () => {
+        console.log(this.state.playerX, this.state.playerO);
+        if (this.state.playerX === v.AI) { console.log('1'); AI.init(v.X, this.state.level); }
+        if (this.state.playerO === v.AI) { console.log('2'); AI.init(v.O, this.state.level); }
         this.setState({ playing: true }) }
     
     playAgainBtnClickedHandler = () => {

@@ -9,12 +9,16 @@ import makeSecondInLineMove from './AImethods/makeSecondInLineMove';
 import makeRandomMove from './AImethods/makeRandomMove';
 import makeArrowMovesCombination from './AImethods/makeArrowMovesCombination';
 
-const ai = (field, player, level = 'normal') => {
-    const aiState = {
-        field: field,
-        player: player,
-        enemy: player === v.X ? v.O : v.X,
-        winCombinationsIDs:[
+function AI(){
+    let aiState = {
+        player: v.O,
+        level: v.normal,
+        enemy: v.X,
+        //X, O or null:
+        field: [null, null, null, 
+                null, null, null, 
+                null, null, null],
+        winCombinationsIDs: [
             [0, 1, 2],
             [3, 4, 5],
             [6, 7, 8],
@@ -23,12 +27,29 @@ const ai = (field, player, level = 'normal') => {
             [2, 5, 8],
             [0, 4, 8],
             [2, 4, 6]
-        ]
+        ],
+        currCombination: null
     };
+    
+    this.setAiState = (player = v.X, level = 'normal') => {
+        aiState = {
+            ...aiState,
+            player: player,
+            level: level,
+            enemy: player === v.X ? v.O : v.X,
+        }
+    }
+
+    const setField = (field) => {
+        aiState = {
+            ...aiState,
+            field: field
+        }
+    }
 
     const easyLevelMoves = () => {
         let makeOrPreventWinMove_data = makeOrPreventWinMove(aiState);
-        if (level === 'easy') {
+        if (aiState.level === 'easy') {
             const random = Math.floor(Math.random() * 2);
             if (!random) { makeOrPreventWinMove_data = null }
         }
@@ -74,20 +95,22 @@ const ai = (field, player, level = 'normal') => {
         return null;
     }
 
-    const makeMove = () => {
-        if (level === 'easy' ||
-            level === 'normal' || 
-            level === 'hard') { 
+    this.makeMove = (field) => {
+        setField(field);
+
+        if (aiState.level === 'easy' ||
+            aiState.level === 'normal' || 
+            aiState.level === 'hard') { 
             
             const easyLevelMove = easyLevelMoves();
             if (easyLevelMove !== null) { return easyLevelMove } 
         }       
-        if (level === 'hard') { 
+        if (aiState.level === 'hard') { 
             const hardLevelMove = hardLevelMoves();
             if (hardLevelMove !== null) { return hardLevelMove }
         }  
-        if (level === 'normal' || 
-            level === 'hard') { 
+        if (aiState.level === 'normal' || 
+            aiState.level === 'hard') { 
             
             const noramlLevelMove = normalLevelMoves();
             if (noramlLevelMove !== null) { return noramlLevelMove } 
@@ -95,8 +118,6 @@ const ai = (field, player, level = 'normal') => {
         
         return makeRandomMove(aiState); 
     }
-
-    return makeMove();
 }
 
-export default ai;
+export default new AI();

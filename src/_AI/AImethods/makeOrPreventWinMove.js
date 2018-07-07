@@ -3,7 +3,7 @@ import {v} from '../../utilities/states';
 const makeOrPreventWinMove = (data) => {
     let nextWinMove = null;
     let nextPreventiveMove = null;
-    
+    console.log(data);
     data.winCombinationsIDs.forEach(combination => {
         const fieldCombination = [];
         combination.forEach(ID => {
