@@ -1,5 +1,5 @@
-import AIActionObj from './AIAction';
-import State from './State';
+import AIActionObj from '../../../src/AI/AI/AIAction';
+import State from '../../../src/AI/AI/State';
 
 describe('AIAction test', () => {
     let AIAction;

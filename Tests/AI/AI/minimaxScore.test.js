@@ -1,6 +1,5 @@
-import minimaxScore from './minimaxScore';
-import {gameScore} from './minimaxScore';
-import State from './State';
+import minimaxScore, {gameScore} from '../../../src/AI/AI/minimaxScore';
+import State from '../../../src/AI/AI/State';
 
 const currState = new State();
 const field = [null, null, null, 
