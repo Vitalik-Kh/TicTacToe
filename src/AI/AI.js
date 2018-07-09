@@ -7,7 +7,6 @@ import moveIfEnemyInTwoOppositeCorners from './AImethods/moveIfEnemyInTwoOpposit
 import moveIfEnemeyInArrowPosition from './AImethods/moveIfEnemyInArrowPosition';
 import makeSecondInLineMove from './AImethods/makeSecondInLineMove';
 import makeRandomMove from './AImethods/makeRandomMove';
-import makeArrowMovesCombination from './AImethods/makeArrowMovesCombination';
 
 const ai = (field, player, level = 'normal') => {
     const aiState = {
