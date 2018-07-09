@@ -7,21 +7,18 @@ function AI() {
 
     this.init = function(aiPlayer, level) {
         this.State.init(aiPlayer, level);
-        console.log(this.State);
     }
     
     this.makeMove = function(field) {
         
-        this.State.field = field.map(function(x) { return x });
+        this.State.setField(field);
 
         var availableSquares = this.State.getFreeSquares();
         
         var availableActions = availableSquares.map(function(square) {
             var action = new AIAction(square);
             var nextState = action.applyTo(this.State);
-            console.log('ai get minimax is next');
             action.minimaxVal = minimaxScore(nextState);
-            console.log('---- AFTER ai get minimax ----');
             return action;
         }.bind(this));
 
@@ -31,8 +28,17 @@ function AI() {
             availableActions.sort(AIAction.sortAscending);
         }
 
-        var nextAction = availableActions[0];
-        var nextMove = nextAction.pos;
+        console.log(availableActions, 'availableActions');
+        const nextActions = [availableActions[0]];
+        for(var i=1; i<availableActions.length; i++) {
+            if (availableActions[0].minimaxVal === availableActions[i].minimaxVal) {
+                nextActions.push(availableActions[i]);
+            }
+        }
+
+        var randomIndex = Math.floor(Math.random() * nextActions.length)
+        var nextAction = nextActions[randomIndex];
+        var nextMove = nextAction.movePos;
         
         return nextMove;
     }

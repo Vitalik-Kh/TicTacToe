@@ -7,12 +7,10 @@ function AIAction (pos) {
     
     this.applyTo = function(oldState) {
         var nextState = new State(oldState);
-        //console.log(this.movePos, 'this.movePos');
         nextState.field[this.movePos] = oldState.turn;
 
         if (oldState.turn === oldState.aiSign) {
             nextState.aiMovesCount++;
-            //console.log(nextState.aiMovesCount, 'movesCount++')
         }
 
         nextState.advanceTurn();
@@ -21,7 +19,7 @@ function AIAction (pos) {
     }
 }
 
-AIAction.prototype.sortAscending = function(firstAct, seconAct) {
+AIAction.sortAscending = function(firstAct, seconAct) {
     if (firstAct.minimaxVal < seconAct.minimaxVal) {
         return -1;
     } else if (firstAct.minimaxVal > seconAct.minimaxVal) {
@@ -31,7 +29,7 @@ AIAction.prototype.sortAscending = function(firstAct, seconAct) {
     }
 } 
 
-AIAction.prototype.sortDescending = function(firstAct, seconAct) {
+AIAction.sortDescending = function(firstAct, seconAct) {
     if (firstAct.minimaxVal > seconAct.minimaxVal) {
         return -1;
     } else if (firstAct.minimaxVal < seconAct.minimaxVal) {

@@ -55,11 +55,10 @@ function State(oldState) {
     }
 
     this.isTerminal = () => {
-        var field = this.field;
-        //console.log(field);
+        var field = this.field.map(function(i) { return i });;
         //check rows
         for (var i=0; i<=6; i+=3) {
-            if (field[i] !== null && field[i] === field[i+1] && field[i] === field[i=2]) {
+            if (field[i] !== null && field[i] === field[i+1] && field[i] === field[i+2]) {
                 this.result = field[i] + '-won';
                 return true;
             }

@@ -1,8 +1,6 @@
 import AIAction from './AIaction';
 
-var gameScore = function(state) {
-    //console.log(state.aiMovesCount, 'ai moves count');
-    //console.log(state.result, 'state result');
+export const gameScore = function(state) {
     if(state.result === 'X-won') {
         return 10 - state.aiMovesCount;
     } else if(state.result === 'O-won') {
@@ -16,10 +14,7 @@ var gameScore = function(state) {
 var count = 0;
 
 function minimaxScore(state) {
-    //console.log(state.turn, 'state turn');
     count++;
-    //console.log(count);
-    //console.log(state.isTerminal());
     if (state.isTerminal()) {
         return gameScore(state);
     } 
@@ -32,7 +27,6 @@ function minimaxScore(state) {
         }
 
         var availableSquares = state.getFreeSquares();
-        //console.log(availableSquares, 'available squares');
 
         var nextStates = availableSquares.map(function(square) {
             var action = new AIAction(square);
@@ -42,7 +36,6 @@ function minimaxScore(state) {
 
         nextStates.forEach(function(nextState) {
             var nextScore = minimaxScore(nextState);
-            //console.log(nextScore, 'next score');
             if (state.turn === 'X') {
                 if (nextScore > stateScore) {
                     stateScore = nextScore;
@@ -53,7 +46,6 @@ function minimaxScore(state) {
                 }
             }
         });
-        //console.log(stateScore, 'stateScore in the end')
         return stateScore;
     }
 
