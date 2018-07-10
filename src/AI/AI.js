@@ -8,9 +8,9 @@ function AI() {
         this.state.init(aiPlayer, level);
     }
     
-    this.makeMove = function(field) {
+    this.makeMove = function(newField) {
         if (this.state.level === 'hard') {
-            return hardMove(this.state, field);
+            return hardMove(this.state, newField);
         }
         
     }
