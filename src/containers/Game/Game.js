@@ -1,7 +1,7 @@
 import React from 'react';
 
 import GameField from '../../components/GameParts/GameField';
-import AI from '../../AI/Index';
+import AI from '../../AI/index';
 import {checkForWinner} from '../../utilities/checkForWinner';
 import Aux from '../../hoc/Auxy';
 import Modal from '../../components/UI/Modal/Modal';

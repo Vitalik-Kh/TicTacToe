@@ -1,5 +1,7 @@
-import AIAction from './AIaction';
+import AIAction from './AIAction';
 
+//Game score depends on if player won and how many steps it took him to win.
+//Draw results in 0 score.
 export const gameScore = function(state) {
     if(state.result === 'X-won') {
         return 10 - state.aiMovesCount;
@@ -11,7 +13,11 @@ export const gameScore = function(state) {
     }
 }
 
-var count = 0;
+export var count = 0;
+
+export function setCountToZero() {
+    count = 0;
+}
 
 function minimaxScore(state) {
     count++;
@@ -50,6 +56,5 @@ function minimaxScore(state) {
     }
 
 }
-
 
 export default minimaxScore;

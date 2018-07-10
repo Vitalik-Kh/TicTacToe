@@ -1,28 +1,20 @@
-import State from './State';
-import AIAction from './AIAction';
-import minimaxScore from './minimaxScore';
+import AIAction from '../core/AIAction';
+import minimaxScore, {count, setCountToZero} from '../core/minimaxScore';
 
-function AI() {
-    this.State = new State(); 
-
-    this.init = function(aiPlayer, level) {
-        this.State.init(aiPlayer, level);
-    }
-    
-    this.makeMove = function(field) {
-        
-        this.State.setField(field);
-
-        var availableSquares = this.State.getFreeSquares();
+var hardMove = function(state, field) {
+    state.setField(field);
+        var availableSquares = state.getFreeSquares();
         
         var availableActions = availableSquares.map(function(square) {
             var action = new AIAction(square);
-            var nextState = action.applyTo(this.State);
+            var nextState = action.applyTo(state);
             action.minimaxVal = minimaxScore(nextState);
+            console.log(count, 'number of recursins');
+            setCountToZero();
             return action;
         }.bind(this));
 
-        if (this.State.aiSign === 'X') {
+        if (state.aiSign === 'X') {
             availableActions.sort(AIAction.sortDescending);
         } else {
             availableActions.sort(AIAction.sortAscending);
@@ -41,7 +33,6 @@ function AI() {
         var nextMove = nextAction.movePos;
         
         return nextMove;
-    }
 }
 
-export default AI;
+export default hardMove;

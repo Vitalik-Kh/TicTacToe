@@ -40,6 +40,8 @@ function State(oldState) {
         this.field = newField.map(function(square) { return square });
     }
 
+    //only for AI to calculate all possible combinations
+    //including enemy's moves
     this.advanceTurn = function() {
         this.turn = this.turn === 'X' ? 'O' : 'X';
     }
@@ -54,6 +56,9 @@ function State(oldState) {
         return indexes;
     }
 
+    //returns:
+    //true: no available cells left
+    //false: still playing
     this.isTerminal = () => {
         var field = this.field.map(function(i) { return i });;
         //check rows

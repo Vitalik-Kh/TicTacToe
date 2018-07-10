@@ -1,3 +1,5 @@
-import AI from './AI/AI';
+import AI from './AI';
 
-export default new AI();
+const newAI = new AI();
+
+export default newAI;
