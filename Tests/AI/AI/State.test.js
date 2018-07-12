@@ -1,4 +1,4 @@
-import State from '../../../src/AI/AI/State';
+import State from '../../../src/AI/core/State';
 
 const currState = new State();
 currState.init('X', 'normal');

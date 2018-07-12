@@ -1,5 +1,5 @@
 import State from './core/State';
-import hardMove from './aiMoves/hardMove';
+import aiMove from './core/aiMove';
 
 function AI() {
     this.state = new State(); 
@@ -9,10 +9,7 @@ function AI() {
     }
     
     this.makeMove = function(newField) {
-        if (this.state.level === 'hard') {
-            return hardMove(this.state, newField);
-        }
-        
+        return aiMove(this.state, newField);
     }
 }
 

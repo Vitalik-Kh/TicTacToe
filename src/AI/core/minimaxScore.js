@@ -13,14 +13,7 @@ export const gameScore = function(state) {
     }
 }
 
-export var count = 0;
-
-export function setCountToZero() {
-    count = 0;
-}
-
 function minimaxScore(state) {
-    count++;
     if (state.isTerminal()) {
         return gameScore(state);
     } 
