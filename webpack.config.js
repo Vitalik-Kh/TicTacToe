@@ -1,5 +1,6 @@
 const autoprefixer = require('autoprefixer');
 const htmlWebpackPlugin = require('html-webpack-plugin');
+const copyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     devtool: 'cheap-module-source-map',
@@ -76,10 +77,6 @@ module.exports = {
             {
                 test: /\.(png|jpe?g|gif)$/,
                 loader: 'url-loader?limit=8000&name=images/[name].[ext]'
-            },
-            {
-                test: /\.svg$/,
-                loader: 'file-loader'
             }
         ]
     },
@@ -88,6 +85,12 @@ module.exports = {
             template: __dirname + '/src/index.html',
             filename: 'index.html',
             inject: 'body'
-        })
+        }),
+        new copyWebpackPlugin([
+            {
+                from: __dirname + '/src/images/favicon.png',
+                to: __dirname + '/dist'
+            }
+        ])
     ]
 }
