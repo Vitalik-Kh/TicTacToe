@@ -40,9 +40,8 @@ $container-padding: 6px;
             float: left;
             font-weight: bold;
             color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            text-align: center;
+            line-height: 100%;
         }
     }
 
@@ -108,4 +107,3 @@ $container-padding: 6px;
         }
     }
 }
-

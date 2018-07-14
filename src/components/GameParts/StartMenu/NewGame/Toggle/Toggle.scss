@@ -71,6 +71,7 @@ $toggle-color: #d46f82;
 .UserIcons { 
     z-index: 20;
     > div {
+        transform: translateZ(0); // for IE to do proper z-index positioning
         height: $toggle-height;
         float: left;
         display: flex;

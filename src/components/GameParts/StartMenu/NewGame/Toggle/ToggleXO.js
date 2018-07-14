@@ -12,9 +12,9 @@ const toggleXO = (props) => {
     ]
 
     return (
-        <div className = {toggleXOClasses.join(' ' )} onClick={props.clicked}>
-                <div className = {toggleXOSliderClasses.join(' ')}></div>
-                <div className={classes.UserIcons}>
+        <div className = { toggleXOClasses.join(' ' ) } onClick={ props.clicked }>
+                <div className = { toggleXOSliderClasses.join(' ') }></div>
+                <div className={ classes.UserIcons }>
                     <div>
                         <i className="fas fa-times"></i>
                     </div>

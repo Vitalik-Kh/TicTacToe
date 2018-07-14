@@ -12,9 +12,9 @@ const togglePlayers = (props) => {
     ];
 
     return (
-        <div className = {togglePlayersClasses.join(' ' )} onClick={props.clicked}>
-                <div className = {togglePlayersSliderClasses.join(' ')}></div>
-                <div className={classes.UserIcons}>
+        <div className = { togglePlayersClasses.join(' ' ) } onClick={ props.clicked }>
+                <div className = { togglePlayersSliderClasses.join(' ') }></div>
+                <div className={ classes.UserIcons }>
                     <div>
                         <i className="far fa-user"></i>
                     </div>

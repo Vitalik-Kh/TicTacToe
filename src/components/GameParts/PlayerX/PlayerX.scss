@@ -1,9 +1,6 @@
 .PlayerX {
     width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     position: relative;
     animation:enterAnim .2s;
 }
@@ -17,15 +14,17 @@
     width: 110%;
     border: 4px solid #f8db37;
     position: absolute;
+    top: 50%;
+    left: 50%;
     border-radius: 3px;
 }
 
 .Line_1 {
-    transform: rotate(45deg);
+    transform: translate(-50%,-50%) rotate(45deg);
 }
 
 .Line_2 {
-    transform: rotate(-45deg);
+    transform: translate(-50%,-50%) rotate(-45deg);
 }
 
 .Winner {
